@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Parallel Testing Suite" parallel="tests" thread-count="2">
+    <test name="Chrome Test">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.gfg.AppTest" />
+        </classes>
+    </test>
+    <test name="Firefox Test">
+        <parameter name="browser" value="firefox" />
+        <classes>
+            <class name="com.gfg.AppTest" />
+        </classes>
+    </test>
+</suite>

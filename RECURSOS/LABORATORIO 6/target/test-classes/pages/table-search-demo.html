@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Table Search</title></head>
+<body>
+<input id="searchBox" placeholder="search"/>
+<table id="table" border="1">
+    <thead><tr><th>Name</th><th>Age</th></tr></thead>
+    <tbody>
+    <tr><td class="name">Bennet</td><td>30</td></tr>
+    <tr><td class="name">Smith</td><td>25</td></tr>
+    </tbody>
+</table>
+<script>
+    document.getElementById('searchBox').addEventListener('input', function(){
+    const q = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#table tbody tr');
+    rows.forEach(r => r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none');
+    });
+</script>
+</body></html>

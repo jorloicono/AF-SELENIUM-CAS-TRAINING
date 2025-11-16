@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Formulario de Prueba - index.html</title>
+  <style>
+    body { font-family: system-ui, Arial; max-width: 900px; margin: 40px auto; line-height: 1.5; }
+    label { display:block; margin-top:12px; }
+    .row { display:flex; gap:12px; align-items:center; margin-top:8px; }
+    .hidden { display:none; }
+    .note { color: #666; font-size: 0.9em; }
+    .container { padding: 18px; border: 1px solid #ddd; border-radius: 8px; }
+    .buttons { margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <h1>Formulario de Prueba</h1>
+  <div class="container">
+    <form id="testForm">
+      <label>Nombre (texto): <input id="name" name="name" type="text" required></label>
+      <label>Contraseña: <input id="pwd" name="pwd" type="password" minlength="8" required></label>
+      <label>Mensaje: <textarea id="msg" name="msg" rows="4"></textarea></label>
+
+      <label>Seleccione una opción (&lt;select&gt;):
+        <select id="sel" name="sel">
+          <option value="opt1">Opción 1</option>
+          <option value="opt2">Opción 2</option>
+          <option value="opt3">Opción 3</option>
+        </select>
+      </label>
+
+      <label>Datalist (escribe y selecciona "Seattle"):
+        <input list="cities" id="city" name="city">
+        <datalist id="cities">
+          <option value="New York">
+          <option value="Seattle">
+          <option value="Los Angeles">
+        </datalist>
+      </label>
+
+      <label>Subir archivo: <input id="file" name="file" type="file" accept="image/*,text/*"></label>
+      <div id="fileStatus" class="note"></div>
+
+      <label>Campo deshabilitado: <input id="disabledInput" disabled value="no-edit"></label>
+      <label>Campo readonly: <input id="readonlyInput" readonly value="valor-readonly"></label>
+
+      <div class="row">
+        <label><input type="checkbox" id="cb1" name="cb" checked> Checkbox 1 (por defecto)</label>
+        <label><input type="checkbox" id="cb2" name="cb"> Checkbox 2</label>
+      </div>
+
+      <div class="row">
+        <label><input type="radio" name="r" value="r1" checked> Radio 1</label>
+        <label><input type="radio" name="r" value="r2"> Radio 2</label>
+      </div>
+
+      <label>Color: <input id="color" name="color" type="color" value="#00ff00"></label>
+      <label>Rango (0-10): <input id="range" name="range" type="range" min="0" max="10" value="5"> <span id="rangeVal">5</span></label>
+
+      <label>Fecha: <input id="date" name="date" type="date"></label>
+
+      <input id="hiddenField" name="hiddenField" type="hidden" value="hidden-value-123">
+
+      <div class="buttons">
+        <button id="submitBtn" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Update range display
+    const range = document.getElementById('range');
+    const rangeVal = document.getElementById('rangeVal');
+    range.addEventListener('input', () => rangeVal.textContent = range.value);
+
+    // File upload preview simulation
+    const fileInput = document.getElementById('file');
+    const fileStatus = document.getElementById('fileStatus');
+    fileInput.addEventListener('change', () => {
+      if (!fileInput.files || fileInput.files.length === 0) {
+        fileStatus.textContent = '';
+        return;
+      }
+      const f = fileInput.files[0];
+      fileStatus.textContent = `Archivo seleccionado: ${f.name} (${f.type || 'tipo desconocido'})`;
+    });
+
+    // Form submit - simulate redirect to submitted-form.html and show sent data there via sessionStorage
+    document.getElementById('testForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = new FormData(this);
+      const obj = {};
+      for (const [k,v] of form.entries()) {
+        // files -> just name
+        if (v instanceof File) obj[k] = v.name || '';
+        else obj[k] = v;
+      }
+      // save to sessionStorage so submitted-form.html can read it
+      sessionStorage.setItem('submittedFormData', JSON.stringify(obj));
+      // redirect to submitted-form.html (simulates server submit)
+      window.location.href = 'submitted-form.html';
+    });
+  </script>
+</body>
+</html>

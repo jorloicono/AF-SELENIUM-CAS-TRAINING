@@ -1,0 +1,39 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Drag and Drop</title>
+    <style>#draggable{width:80px;height:30px;background:#cce;padding:5px;display:inlineblock}#dropzone{width:200px;height:80px;border:1px solid #333;display:inlineblock;margin-left:20px}</style>
+</head>
+<body>
+<div id="draggable" draggable="true">Draggable 1</div>
+<div id="dropzone">Drop here</div>
+<div id="droppedlist"></div>
+<script>
+    const drag = document.getElementById('draggable');
+    const drop = document.getElementById('dropzone');
+    drop.addEventListener('dragover', e => e.preventDefault());
+    drop.addEventListener('drop', e => {
+    e.preventDefault();
+    // Simula que el elemento aparece luego de una operación
+    setTimeout(()=> {
+    const span = document.createElement('div');
+    span.id = 'dropped-item';
+    span.innerText = 'Draggable 1';
+    document.getElementById('droppedlist').appendChild(span);
+    }, 400);
+    });
+</script>
+</body></html>
+dynamic-data-loading-demo.html
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Dynamic Data</title></head>
+<body>
+<button id="getRandom" onclick="load()">Get Random User</button>
+<div id="loading"></div>
+<script>
+    function load(){
+    document.getElementById('loading').innerText = 'Loading...';
+    setTimeout(()=> {
+    document.getElementById('loading').innerText = 'First Name: John';
+    }, 700);
+    }
+</script>
+</body></html>

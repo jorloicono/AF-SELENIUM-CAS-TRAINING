@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Práctica Selectores: XPath y CSS Avanzados</title>
+  <style>
+    .fancy { padding: 8px; border: 1px solid #ddd; margin: 4px; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <h1>Prueba de selectores</h1>
+
+  <section id="forms">
+    <div class="fancy" data-role="user-row" data-id="u-100">
+      <label for="name">Nombre:</label>
+      <input id="name" name="name" type="text" value="María" />
+      <button class="btn save" title="guardar">Guardar</button>
+    </div>
+
+    <div class="fancy" data-role="user-row" data-id="u-101">
+      <label for="name2">Nombre 2:</label>
+      <input id="name2" name="name2" type="text" value="Pedro" />
+      <button class="btn cancel" title="cancelar">Cancelar</button>
+    </div>
+
+    <div id="options" class="fancy">
+      <input type="checkbox" id="cb1" name="agree" />
+      <label for="cb1">Acepto</label>
+
+      <input type="radio" id="r1" name="color" value="rojo" />
+      <label for="r1">Rojo</label>
+
+      <input type="radio" id="r2" name="color" value="azul" checked />
+      <label for="r2">Azul</label>
+    </div>
+  </section>
+
+  <section id="list">
+    <ul>
+      <li class="item">Manzana</li>
+      <li class="item special" data-price="1.23">Pera</li>
+      <li class="item">Naranja</li>
+      <li class="item special" data-price="2.50">Melón</li>
+    </ul>
+  </section>
+
+  <section id="dynamic">
+    <div class="card" data-state="collapsed">Card A</div>
+    <div class="card" data-state="expanded">Card B</div>
+    <div class="card" data-state="collapsed">Card C</div>
+    <div class="card" data-state="expanded">Card D</div>
+  </section>
+
+  <section aria-label="buttons" id="many-buttons">
+    <button class="btn primary" data-action="save">Save</button>
+    <button class="btn" data-action="delete">Delete</button>
+    <button class="btn secondary" data-action="save-draft">Save Draft</button>
+  </section>
+
+  <div id="structured">
+    <div class="parent">
+      <div class="child first">Primer hijo</div>
+      <div class="child second">Segundo hijo</div>
+      <div class="child last">Tercer hijo</div>
+    </div>
+  </div>
+
+  <script>
+    // pequeño script para togglear checkbox via data attribute (demo interacción dinámica)
+    document.getElementById('many-buttons').addEventListener('click', function(e){
+      if(e.target.dataset.action === 'save'){
+        alert('Guardado (simulado)');
+      }
+    });
+  </script>
+</body>
+</html>

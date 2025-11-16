@@ -1,0 +1,15 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Checkbox Demo</title></head>
+<body>
+<h1>Checkbox Demo</h1>
+<button id="checkAll" onclick="checkAll()">Check All</button>
+<br/><br/>
+<input type="checkbox" id="cb1"/> <label for="cb1">Checkbox 1</label><br/>
+<input type="checkbox" id="cb2"/> <label for="cb2">Checkbox 2</label><br/>
+<script>
+    function checkAll(){
+    setTimeout(()=>{ document.getElementById('cb1').checked = true;
+   document.getElementById('cb2').checked = true; }, 400);
+    }
+</script>
+</body></html>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7168f9ba-ed09-4aae-9bd2-f5325927412e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/libs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SELENIUM.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/chromedriver" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/chromedriver.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/async-http-client-2.12.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/async-http-client-netty-utils-2.12.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/auto-service-annotations-1.1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/byte-buddy-1.14.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/checker-qual-3.33.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/commons-exec-1.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/error_prone_annotations-2.18.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/failsafe-3.3.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/failureaccess-1.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/guava-32.1.2-jre.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/j2objc-annotations-2.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/jakarta.activation-1.2.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/jsr305-3.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/junit-jupiter-api-5.8.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/junit-jupiter-engine-5.8.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/junit-platform-commons-1.8.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/junit-platform-engine-1.8.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/junit-platform-launcher-1.8.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/junit-platform-suite-api-1.8.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-buffer-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-codec-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-codec-http-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-codec-socks-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-common-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-handler-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-handler-proxy-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-reactive-streams-2.0.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-resolver-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-transport-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-transport-classes-epoll-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-transport-classes-kqueue-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-transport-native-epoll-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-transport-native-kqueue-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/netty-transport-native-unix-common-4.1.96.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-api-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-api-events-1.28.0-alpha.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-context-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-exporter-logging-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-extension-incubator-1.28.0-alpha.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-sdk-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-sdk-common-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-sdk-extension-autoconfigure-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-sdk-extension-autoconfigure-spi-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-sdk-logs-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-sdk-metrics-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-sdk-trace-1.28.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentelemetry-semconv-1.28.0-alpha.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/opentest4j-1.3.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/reactive-streams-1.0.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-api-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-api-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-chrome-driver-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-chrome-driver-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-chromium-driver-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-chromium-driver-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-devtools-v115-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-devtools-v115-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-devtools-v116-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-devtools-v116-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-devtools-v117-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-devtools-v117-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-devtools-v85-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-devtools-v85-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-edge-driver-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-edge-driver-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-firefox-driver-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-firefox-driver-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-http-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-http-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-ie-driver-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-ie-driver-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-java-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-java-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-json-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-json-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-manager-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-manager-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-os-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-os-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-remote-driver-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-remote-driver-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-safari-driver-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-safari-driver-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-support-4.13.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/selenium-support-4.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/sikulixapi-2.0.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/slf4j-api-2.0.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/POMEjemplo/main/LoginPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/POMEjemplo/main/ProductsPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/POMEjemplo/test/login/LoginWithOutPOMTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/POMEjemplo/test/login/LoginWithPOMTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/POMEjemplo/test/parent/ParentTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Clase1_CrearInstanciayObtenerTitulo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Clase2_CrearTestConAnotacionesJUnit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Clase3_BuscarElementoPorElId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Clase4_BuscandoElementoPorLinktext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Clase5_BuscarElementoPorTagName.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Clase6_BuscarElementoPorXPath.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Clase7_RellenarUnFormulario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Class6.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Class7.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Class8.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/ejemplos/Class9.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/labs/Ejercicio1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/labs/Lab6_Ejemplo1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/labs/Lab6_Ejemplo2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/java/com/labs/Lab7.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/resources/barrabusqueda.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/resources/botonabrir.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/resources/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/resources/index_completo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/resources/submitted-form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplosylabs/resources/testpage.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="343GVfIJpzlBP0kmxnseOlgORHS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Jorge/Desktop/AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER/RECURSOS/SELENIUM",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jorge\Desktop\AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER\RECURSOS\libs" />
+      <recent name="C:\Users\Jorge\Desktop\AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER\RECURSOS\drivers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jorge\Desktop\AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER\RECURSOS\libs" />
+      <recent name="C:\Users\Jorge\Desktop\AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER\RECURSOS\src\test\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="test.java.com.labs" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Clase19_EjemploDobleClick">
+    <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
+      <option name="appName" />
+      <option name="appServicePlanName" />
+      <option name="appServicePlanResourceGroup" />
+      <option name="appSettingsKey" value="8fc1e346-744a-47a2-b73f-49caf295daf6" />
+      <option name="artifact" />
+      <option name="debugOptions" />
+      <option name="deployment" />
+      <option name="deploymentStagingDirectoryPath" />
+      <option name="funcPath" />
+      <option name="functionHostArguments" />
+      <option name="hostJsonPath" />
+      <option name="insightsName" />
+      <option name="instrumentationKey" />
+      <option name="javaVersion" />
+      <option name="localSettingsJsonPath" />
+      <option name="moduleName" />
+      <option name="os" />
+      <option name="pricingTier" />
+      <option name="providerMap">
+        <map />
+      </option>
+      <option name="region" />
+      <option name="resourceGroup" />
+      <option name="stagingFolder" />
+      <option name="subscription" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Clase12_ExpectedConditions1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ejemplosylabs.java.com.ejemplos.Clase12_ExpectedConditions1" />
+      <module name="SELENIUM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ejemplosylabs.java.com.ejemplos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Clase17_EjemploAccionClick" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ejemplosylabs.java.com.ejemplos.Clase17_EjemploAccionClick" />
+      <module name="SELENIUM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ejemplosylabs.java.com.ejemplos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Clase18_EjemploMoveToElement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ejemplosylabs.java.com.ejemplos.Clase18_EjemploMoveToElement" />
+      <module name="SELENIUM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ejemplosylabs.java.com.ejemplos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Clase19_EjemploDobleClick" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ejemplosylabs.java.com.ejemplos.Clase19_EjemploDobleClick" />
+      <module name="SELENIUM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ejemplosylabs.java.com.ejemplos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Clase12_ExpectedConditions1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SELENIUM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ejemplosylabs.java.com.ejemplos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ejemplosylabs.java.com.ejemplos" />
+      <option name="MAIN_CLASS_NAME" value="ejemplosylabs.java.com.ejemplos.Clase12_ExpectedConditions1" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Clase19_EjemploDobleClick" />
+        <item itemvalue="Application.Clase18_EjemploMoveToElement" />
+        <item itemvalue="Application.Clase17_EjemploAccionClick" />
+        <item itemvalue="Application.Clase12_ExpectedConditions1" />
+        <item itemvalue="JUnit.Clase12_ExpectedConditions1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7168f9ba-ed09-4aae-9bd2-f5325927412e" name="Changes" comment="" />
+      <created>1760434866657</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1760434866657</updated>
+    </task>
+    <servers />
+  </component>
+</project>

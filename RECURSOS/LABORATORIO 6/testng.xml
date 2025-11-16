@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="ExpectedConditions Suite">
+    <test name="ExpectedConditionsTests">
+        <classes>
+            <class name="lab.tests.ExpectedConditionsTests"/>
+        </classes>
+    </test>
+</suite>

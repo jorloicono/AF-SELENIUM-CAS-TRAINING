@@ -1,0 +1,15 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Simple Form</title></head>
+<body>
+<h1>Simple Form Demo</h1>
+<input id="user-message" placeholder="Message"/>
+<button id="showInput" onclick="show()">Get Checked Value</button>
+<p id="message"></p>
+<script>
+    function show(){
+    const v = document.getElementById('user-message').value;
+    // Simular pequeña demora
+    setTimeout(()=> document.getElementById('message').innerText = v, 300);
+    }
+</script>
+</body></html>
