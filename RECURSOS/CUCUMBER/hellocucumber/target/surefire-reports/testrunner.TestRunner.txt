@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: testrunner.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 3.55 s <<< FAILURE! - in testrunner.TestRunner
+runScenario(testrunner.TestRunner)  Time elapsed: 0.217 s  <<< FAILURE!
+io.cucumber.core.runner.DuplicateStepDefinitionException: Duplicate step definitions in stepdefinitions.FailedLoginSteps.the_user_enters_username_and_password(java.lang.String,java.lang.String) and stepdefinitions.LoginSteps.userEntersCredentials(java.lang.String,java.lang.String)
+
