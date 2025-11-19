@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Selenium Dynamic Practice</title>
+    <style>
+        #redbox {
+            width: 150px;
+            height: 150px;
+            background-color: red;
+            margin-top: 15px;
+        }
+
+        #colorbox {
+            width: 120px;
+            height: 120px;
+            background-color: blue;
+            margin-top: 20px;
+            transition: background-color 1s ease;
+        }
+
+        #finish {
+            display: none;
+            margin-top: 20px;
+            font-size: 22px;
+            color: darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Práctica Selenium – Esperas Dinámicas</h1>
+
+    <!-- 1. Botón que inicia deshabilitado -->
+    <button id="enable-button" disabled>Botón habilitado dinámicamente</button>
+    <script>
+        setTimeout(() => {
+            document.getElementById("enable-button").disabled = false;
+        }, 3000);
+    </script>
+
+    <hr>
+
+    <!-- 2. Botón que genera un elemento tipo AJAX -->
+    <button id="adder">Agregar caja (AJAX)</button>
+    <div id="ajax-container"></div>
+
+    <script>
+        document.getElementById("adder").addEventListener("click", () => {
+            setTimeout(() => {
+                let box = document.createElement("div");
+                box.className = "redbox";
+                box.id = "redbox";
+                document.getElementById("ajax-container").appendChild(box);
+            }, 2000);
+        });
+    </script>
+
+    <hr>
+
+    <!-- 3. Botón que crea un iframe dinámico -->
+    <button id="frame-button">Crear Iframe dinámico</button>
+    <div id="frame-container"></div>
+
+    <script>
+        document.getElementById("frame-button").addEventListener("click", () => {
+            setTimeout(() => {
+                let frame = document.createElement("iframe");
+                frame.id = "my-frame";
+                frame.width = 300;
+                frame.height = 200;
+                frame.srcdoc = `
+                    <html>
+                        <body>
+                            <p id="inside-frame">Texto dentro del iframe</p>
+                        </body>
+                    </html>`;
+                document.getElementById("frame-container").appendChild(frame);
+            }, 1500);
+        });
+    </script>
+
+    <hr>
+
+    <!-- 4. Caja que cambia de color dinámicamente (para Fluent Wait) -->
+    <div id="colorbox"></div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById("colorbox").style.backgroundColor = "green";
+        }, 5000);
+    </script>
+
+    <hr>
+
+    <!-- 5. Texto final que aparece -->
+    <div id="finish">¡Todos los cambios han terminado!</div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById("finish").style.display = "block";
+        }, 7000);
+    </script>
+
+</body>
+</html>
