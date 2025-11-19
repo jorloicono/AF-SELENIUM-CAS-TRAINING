@@ -1,6 +1,5 @@
 package POMEjemplo.test.login;
 
-import POMEjemplo.test.parent.ParentTest;
 import org.junit.jupiter.api.Test;
 
 public class LoginWithPOMTest extends ParentTest {

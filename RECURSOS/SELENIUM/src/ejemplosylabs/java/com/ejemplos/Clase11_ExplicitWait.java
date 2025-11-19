@@ -24,7 +24,7 @@ public class Clase11_ExplicitWait {
 
             // Navegamos a la web
 
-            driver.get("C:\\Users\\Jorge\\Desktop\\AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER\\RECURSOS\\src\\ejemplosylabs\\resources\\index_completo.html");
+            driver.get("C:\\Users\\Jorge\\Desktop\\AF-SELENIUM-CAS-TRAINING\\RECURSOS\\SELENIUM\\src\\ejemplosylabs\\resources\\index_completo.html");
 
             // Es un wait generico
 

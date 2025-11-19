@@ -1,180 +1,87 @@
 package ejemplosylabs.java.com.labs;
-
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class Ejercicio2 {
 
-    private WebDriver driver;
+    public static void main(String[] args) {
 
-    // --- Setup ---
-    public void setup() {
-
-        driver = new ChromeDriver();
+        // 1️⃣ Configuración inicial
+        WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        // Espera implícita global (solo se aplica a los tests que la usan)
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    }
 
-    // --- TearDown ---
-    public void teardown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+        // Abre tu archivo local o URL del HTML
+        driver.get("C:\\Users\\Jorge\\Desktop\\AF-SELENIUM-CAS-TRAINING\\RECURSOS\\SELENIUM\\src\\ejemplosylabs\\resources\\EJERCICIO2.html"); // <-- cambia la ruta
 
-    // ==========================
-    // Parte 1 – Espera Implícita
-    // ==========================
-    public long testImplicitWait() {
-        System.out.println("=== Parte 1: Espera Implícita ===");
-        long start = System.currentTimeMillis();
-
-        driver.get("https://the-internet.herokuapp.com/dynamic_controls");
-
-        // Caso 1 - Eliminar elemento
-        driver.findElement(By.xpath("//button[text()='Remove']")).click();
-        WebElement mensaje = driver.findElement(By.id("message"));
-        System.out.println("Texto mostrado: " + mensaje.getText());
-
-        // Caso 2 - Agregar elemento
-        driver.findElement(By.xpath("//button[text()='Add']")).click();
-        WebElement checkbox = driver.findElement(By.cssSelector("#checkbox input"));
-        if (checkbox.isDisplayed()) {
-            checkbox.click();
-            System.out.println("Checkbox marcado nuevamente.");
-        }
-
-        // Caso 3 - Campo de texto dinámico
-        WebElement enableButton = driver.findElement(By.xpath("//button[text()='Enable']"));
-        enableButton.click();
-
-        WebElement input = driver.findElement(By.xpath("//input[@type='text']"));
-        input.sendKeys("Prueba con espera implícita");
-        System.out.println("Texto escrito en campo habilitado.");
-
-        driver.findElement(By.xpath("//button[text()='Disable']")).click();
-        System.out.println("Campo deshabilitado nuevamente.");
-
-        long end = System.currentTimeMillis();
-        long duration = (end - start);
-        System.out.println("Tiempo total (implícita): " + duration + " ms\n");
-        return duration;
-    }
-
-    // ==========================
-    // 🟡 Parte 2 – Espera Explícita
-    // ==========================
-    public long testExplicitWait() {
-        System.out.println("=== Parte 2: Espera Explícita ===");
-        long start = System.currentTimeMillis();
-
-        driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
-
-        driver.findElement(By.cssSelector("#start button")).click();
-
+        // Espera explícita
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement helloText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("finish")));
 
-        String texto = helloText.getText();
-        if ("Hello World!".equals(texto)) {
-            System.out.println("Texto encontrado correctamente: " + texto);
-        } else {
-            System.out.println("Texto inesperado: " + texto);
-        }
+        // ------------------------------
+        // 2️⃣ Botón que se habilita dinámicamente
+        WebElement enableBtn = driver.findElement(By.id("enable-button"));
+        wait.until(ExpectedConditions.elementToBeClickable(enableBtn));
+        enableBtn.click();
+        System.out.println("Botón habilitado y clickeado.");
 
-        long end = System.currentTimeMillis();
-        long duration = (end - start);
-        System.out.println("Tiempo total (explícita): " + duration + " ms\n");
-        return duration;
-    }
+        // ------------------------------
+        // 3️⃣ Elemento AJAX dinámico
+        WebElement addBtn = driver.findElement(By.id("adder"));
+        addBtn.click();
 
-    // ==========================
-    // Parte 3 – Espera Fluida (Fluent Wait)
-    // ==========================
-    public long testFluentWait() {
-        System.out.println("=== Parte 3: Espera Fluida ===");
-        long start = System.currentTimeMillis();
+        WebElement redBox = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("redbox"))
+        );
+        System.out.println("Elemento AJAX visible: " + redBox.getAttribute("id"));
 
-        driver.get("https://the-internet.herokuapp.com/dynamic_loading/2");
+        // ------------------------------
+        // 4️⃣ Crear y cambiar a iframe dinámico
+        WebElement frameBtn = driver.findElement(By.id("frame-button"));
+        frameBtn.click();
 
-        driver.findElement(By.cssSelector("#start button")).click();
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("my-frame")));
+        WebElement frameText = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("inside-frame"))
+        );
+        System.out.println("Texto dentro del iframe: " + frameText.getText());
+
+        // Volver al DOM principal
+        driver.switchTo().defaultContent();
+
+        // ------------------------------
+        // 5️⃣ Fluent Wait para cambio de color
+        WebElement colorBox = driver.findElement(By.id("colorbox"));
 
         Wait<WebDriver> fluentWait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(15))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class);
+                .withTimeout(Duration.ofSeconds(20))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(NoSuchElementException.class);
 
-        WebElement helloText = fluentWait.until(driver ->
-                driver.findElement(By.id("finish"))
+        fluentWait.until(d -> {
+            String color = colorBox.getCssValue("background-color");
+            System.out.println("Esperando cambio de color... actual: " + color);
+            return color.contains("0, 128, 0"); // verde en RGB
+        });
+
+        System.out.println("El color cambió a verde.");
+
+        // ------------------------------
+        // 6️⃣ Validar texto final
+        WebElement finishText = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("finish"))
         );
+        System.out.println("Texto final: " + finishText.getText());
 
-        System.out.println("Texto encontrado (fluent wait): " + helloText.getText());
-
-        long end = System.currentTimeMillis();
-        long duration = (end - start);
-        System.out.println("Tiempo total (fluida): " + duration + " ms\n");
-        return duration;
-    }
-
-    // ==========================
-    // ⚙️ Método reutilizable
-    // ==========================
-    public boolean waitForText(By locator, String text, int timeoutSeconds, String mode) {
-        try {
-            switch (mode.toLowerCase()) {
-                case "implicit":
-                    driver.findElement(locator);
-                    return driver.findElement(locator).getText().equals(text);
-
-                case "explicit":
-                    WebDriverWait explicit = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
-                    return explicit.until(ExpectedConditions.textToBe(locator, text));
-
-                case "fluent":
-                    Wait<WebDriver> fluent = new FluentWait<>(driver)
-                            .withTimeout(Duration.ofSeconds(timeoutSeconds))
-                            .pollingEvery(Duration.ofMillis(500))
-                            .ignoring(NoSuchElementException.class);
-                    return fluent.until(d -> d.findElement(locator).getText().equals(text));
-
-                default:
-                    throw new IllegalArgumentException("Modo de espera no válido.");
-            }
-        } catch (TimeoutException e) {
-            System.out.println("⚠️ Texto no encontrado en modo " + mode);
-            return false;
-        }
-    }
-
-    // ==========================
-    // 🧩 MAIN
-    // ==========================
-    public static void main(String[] args) {
-        Ejercicio2 test = new Ejercicio2();
-        test.setup();
-
-        long t1 = test.testImplicitWait();
-        long t2 = test.testExplicitWait();
-        long t3 = test.testFluentWait();
-
-        test.teardown();
-
-        System.out.println("====== COMPARATIVO DE TIEMPOS ======");
-        System.out.println("Implícita: " + t1 + " ms");
-        System.out.println("Explícita: " + t2 + " ms");
-        System.out.println("Fluida:    " + t3 + " ms");
-
-        long min = Math.min(t1, Math.min(t2, t3));
-        if (min == t1) System.out.println("🏆 La espera implícita fue la más rápida.");
-        else if (min == t2) System.out.println("🏆 La espera explícita fue la más rápida.");
-        else System.out.println("🏆 La espera fluida fue la más rápida.");
+        // ------------------------------
+        // Cerrar navegador
+        driver.quit();
     }
 }
-

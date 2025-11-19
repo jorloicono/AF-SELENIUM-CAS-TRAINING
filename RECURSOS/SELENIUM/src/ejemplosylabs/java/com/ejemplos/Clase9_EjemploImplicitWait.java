@@ -25,7 +25,7 @@ public class Clase9_EjemploImplicitWait {
 
             // Navegamos a la web
 
-            driver.get("C:\\Users\\Jorge\\Downloads\\jorloicono AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER master RECURSOS\\SELENIUM\\src\\ejemplosylabs\\resources\\index_completo.html");
+            driver.get("C:\\Users\\Jorge\\Desktop\\AF-SELENIUM-CAS-TRAINING\\RECURSOS\\SELENIUM\\src\\ejemplosylabs\\resources\\index_completo.html");
 
             // Busco el elemento por id y lo guardo en un webelement
 

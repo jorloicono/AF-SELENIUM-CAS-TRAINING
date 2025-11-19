@@ -1,4 +1,4 @@
-package POMEjemplo.test.parent;
+package POMEjemplo.test.login;
 
 import POMEjemplo.main.LoginPage;
 import POMEjemplo.main.ProductsPage;
@@ -12,13 +12,12 @@ import java.time.Duration;
 
 public class ParentTest {
 
-    WebDriver webDriver;
-    protected LoginPage loginPage;
-    protected ProductsPage productsPage;
+        static WebDriver webDriver;
+        static LoginPage loginPage;
+        static ProductsPage productsPage;
 
-    @BeforeAll
-    public void setUp() {
-        try{
+        @BeforeAll
+        public static void setUp() {
             System.setProperty("web-driver.chrome.driver","./drivers/chromedriver.exe");
             webDriver = new ChromeDriver();
 
@@ -27,13 +26,10 @@ public class ParentTest {
 
             loginPage = new LoginPage(webDriver);
             productsPage = new ProductsPage(webDriver);
-        }catch (Exception e){
-            Assertions.fail("Can not create driver session");
         }
-    }
 
-    @AfterAll
-    public void tearDown() {
+        @AfterAll
+    public static void tearDown() {
         webDriver.quit();
     }
 
