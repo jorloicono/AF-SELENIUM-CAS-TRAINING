@@ -1,51 +1,51 @@
 # AF-SELENIUM-CAS-TRAINING
 
-## INTRODUCCIÓN A LA AUTOMATIZACIÓN DE PRUEBAS
-- Conceptos fundamentales de la automatización de pruebas  
-- Beneficios y desafíos de la automatización  
-- Introducción a Selenium WebDriver y sus componentes  
+## Fundamentos de la automatización de pruebas
 
-## CONFIGURACIÓN DEL ENTORNO DE DESARROLLO
-- Instalación de JDK y configuración de variables de entorno  
-- Uso de Maven para la gestión de dependencias  
-- Configuración de un proyecto en un IDE (Eclipse o IntelliJ IDEA)  
+- Ventajas y desafíos del testing automatizado
+- Enfoque orientado a pruebas funcionales web
+- Introducción a Selenium WebDriver y su ecosistema
 
-## FUNDAMENTOS DE SELENIUM WEBDRIVER
-- Arquitectura de Selenium WebDriver  
-- Configuración de WebDriver para distintos navegadores  
-- Creación de scripts de prueba básicos  
+## Configuración del entorno de automatización
 
-## LOCALIZACIÓN DE ELEMENTOS EN PÁGINAS WEB
-- Uso de identificadores, nombres y clases  
-- Selectores CSS y XPath  
-- Estrategias para manejar elementos dinámicos  
+- Configuración del entorno en entornos no Java (PHP, .NET)
+- Herramientas y editores recomendados para el trabajo con Selenium
+- Instalación y uso de WebDriver para distintos navegadores
 
-## MANEJO DE EVENTOS E INTERACCIÓN CON ELEMENTOS
-- Automatización de formularios: campos de texto, botones, menús desplegables  
-- Manejo de ventanas emergentes y alertas  
-- Uso de iframes y marcos anidados  
+## Scripting básico con Selenium WebDriver
 
-## SINCRONIZACIÓN Y ESPERAS EN SELENIUM
-- Diferencias entre esperas implícitas y explícitas  
-- Uso de `FluentWait` para condiciones específicas  
-- Sincronización en aplicaciones con AJAX  
+- Estructura de un script de prueba
+- Localización de elementos: ID, clases, CSS, XPath
+- Navegación, inputs, clics, formularios y validaciones
 
-## FRAMEWORKS DE PRUEBA Y DISEÑO DE SCRIPTS
-- Introducción a TestNG y JUnit  
-- Implementación del modelo **Page Object Model (POM)**  
-- Creación de suites de prueba y generación de reportes  
+## Interacción avanzada con elementos
 
-## EJECUCIÓN DE PRUEBAS EN PARALELO Y EN LA NUBE
-- Configuración de Selenium Grid para pruebas distribuidas  
-- Uso de plataformas en la nube para ejecución remota  
-- Pruebas en distintos navegadores y sistemas operativos  
+- Manejo de ventanas emergentes y alertas
+- Trabajo con iframes, listas desplegables y tablas dinámicas
+- Casos reales de flujos de usuario
 
-## INTEGRACIÓN CON HERRAMIENTAS DE CI/CD
-- Introducción a la integración continua con Jenkins  
-- Automatización de la ejecución de pruebas en pipelines de CI/CD  
-- Generación de informes y análisis de resultados  
+## Sincronización y estabilidad en pruebas
 
-## CASOS PRÁCTICOS Y BUENAS PRÁCTICAS EN AUTOMATIZACIÓN DE PRUEBAS
-- Ejercicios prácticos sobre aplicaciones web reales  
-- Estrategias para mantener y escalar pruebas automatizadas  
-- Buenas prácticas en la automatización de pruebas con Selenium  
+- Esperas implícitas vs. explícitas
+- FluentWait y condiciones personalizadas
+- Sincronización en aplicaciones con AJAX
+
+## Diseño estructurado y frameworks de prueba
+
+- Introducción a TestNG o frameworks equivalentes
+- Page Object Model (POM) aplicado a flujos de pantalla
+- Organización de proyectos de automatización
+
+## Integración en pipelines de CI/CD
+
+- Fundamentos de CI/CD aplicados al testing
+- Ejecución de pruebas en pipelines propios (GitHub Actions, Azure DevOps, etc.)
+- Generación y análisis de reportes automatizados
+
+## Ejecución distribuida con Selenium Grid sobre Azure
+
+- Introducción a Selenium Grid y arquitectura distribuida
+- Despliegue de Selenium Grid sobre Azure
+- Pruebas en distintos navegadores, versiones y sistemas operativos
+
+## Pruebas en distintos navegadores, versiones y sistemas operativos
