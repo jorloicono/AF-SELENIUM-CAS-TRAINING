@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Formulario enviado - submitted-form.html</title>
+  <style> body { font-family: system-ui, Arial; max-width: 900px; margin: 40px auto; } .container{padding:18px;border:1px solid #ddd;border-radius:8px;} table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:8px;text-align:left}</style>
+</head>
+<body>
+  <h1>Formulario enviado</h1>
+  <div class="container">
+    <p>Datos recibidos:</p>
+    <table id="dataTable"><thead><tr><th>Campo</th><th>Valor</th></tr></thead><tbody></tbody></table>
+    <p class="note"><a href="index.html">Return to index</a></p>
+  </div>
+
+  <script>
+    const raw = sessionStorage.getItem('submittedFormData');
+    const tbody = document.querySelector('#dataTable tbody');
+    if (!raw) {
+      tbody.innerHTML = '<tr><td colspan="2">No se encontraron datos enviados (abre el formulario desde index.html y envía).</td></tr>';
+    } else {
+      const obj = JSON.parse(raw);
+      for (const k of Object.keys(obj)) {
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        td1.textContent = k;
+        const td2 = document.createElement('td');
+        td2.textContent = obj[k];
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tbody.appendChild(tr);
+      }
+    }
+  </script>
+</body>
+</html>
