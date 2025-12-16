@@ -1,4 +1,4 @@
-# GUÍA COMPLETA: LABORATORIO 5 - POM EN PHP
+# GUÍA COMPLETA: POM 
 
 ## Objetivo del Laboratorio
 
