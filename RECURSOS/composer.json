@@ -1,0 +1,17 @@
+{
+    "name": "jorge/selenium-php-proyecto",
+    "autoload": {
+        "psr-4": {
+            "Jorge\\SeleniumPhpProyecto\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jorge López Blasco",
+            "email": "jorgelopez@iconotc.com"
+        }
+    ],
+    "require": {
+        "php-webdriver/webdriver": "^1.1"
+    }
+}
