@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica de Waits</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+        
+        input[type="text"], button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            width: auto;
+        }
+        
+        button:hover {
+            background: #764ba2;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .visible {
+            display: block;
+            color: green;
+            font-weight: bold;
+        }
+        
+        .info {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Práctica de Implicit y Explicit Waits</h1>
+        
+        <!-- SECCIÓN 1: Implicit Wait -->
+        <div class="section">
+            <h2>Sección 1: Implicit Wait</h2>
+            <p>Este campo siempre está visible desde el comienzo.</p>
+            
+            <label>Campo que siempre existe:</label>
+            <input 
+                id="always-here" 
+                type="text" 
+                placeholder="Escribe aquí (Implicit Wait)"
+                value=""
+            >
+            
+            <div class="info">
+                ℹ️ Este campo NO necesita Explicit Wait.
+                El Implicit Wait (10 segundos) es suficiente.
+            </div>
+        </div>
+        
+        <!-- SECCIÓN 2: Explicit Wait -->
+        <div class="section">
+            <h2>Sección 2: Explicit Wait</h2>
+            <p>Este campo aparece dinámicamente tras 2 segundos de hacer clic.</p>
+            
+            <button onclick="showDynamicField()">
+                Mostrar Campo Dinámico (Espera 2 segundos)
+            </button>
+            
+            <label>Campo que aparece con delay:</label>
+            <input 
+                id="dynamic-field" 
+                type="text" 
+                placeholder="Escribe aquí (Explicit Wait)"
+                class="hidden"
+                value=""
+            >
+            
+            <div class="info">
+                ℹ️ Este campo necesita Explicit Wait.
+                Aparece después de 2 segundos del clic.
+            </div>
+        </div>
+        
+        <!-- SECCIÓN 3: Comparación -->
+        <div class="section">
+            <h2>Sección 3: Elementos Ocultos</h2>
+            <p>Estos campos están en el DOM pero no son visibles.</p>
+            
+            <button onclick="toggleVisibility()">
+                Mostrar Campo Oculto (Instant)
+            </button>
+            
+            <label>Campo oculto en el DOM:</label>
+            <input 
+                id="hidden-field" 
+                type="text" 
+                placeholder="Escribe aquí (Oculto pero existe)"
+                style="display:none;"
+                value=""
+            >
+            
+            <div class="info">
+                ℹ️ Este campo está en el DOM pero con display:none.
+                Implicit Wait lo puede encontrar.
+            </div>
+        </div>
+        
+        <!-- Estado actual -->
+        <div class="section" style="background: #fff3cd; border-left-color: #ffc107;">
+            <h3>📊 Estado Actual:</h3>
+            <p>Campo Always-Here: <strong id="status-always">✓ Visible</strong></p>
+            <p>Campo Dynamic: <strong id="status-dynamic">✗ Oculto</strong></p>
+            <p>Campo Hidden: <strong id="status-hidden">✗ Oculto en DOM</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar campo dinámico tras 2 segundos
+        function showDynamicField() {
+            console.log('Botón clickeado, esperando 2 segundos...');
+            document.getElementById('dynamic-field').classList.add('hidden');
+            
+            setTimeout(() => {
+                const field = document.getElementById('dynamic-field');
+                field.classList.remove('hidden');
+                field.classList.add('visible');
+                
+                console.log('Campo dinámico ahora visible');
+                document.getElementById('status-dynamic').textContent = '✓ Visible';
+                document.getElementById('status-dynamic').style.color = 'green';
+            }, 2000);
+        }
+        
+        // Mostrar campo oculto instantáneamente
+        function toggleVisibility() {
+            const field = document.getElementById('hidden-field');
+            
+            if (field.style.display === 'none') {
+                field.style.display = 'block';
+                console.log('Campo oculto ahora visible');
+                document.getElementById('status-hidden').textContent = '✓ Visible';
+                document.getElementById('status-hidden').style.color = 'green';
+            } else {
+                field.style.display = 'none';
+                document.getElementById('status-hidden').textContent = '✗ Oculto en DOM';
+                document.getElementById('status-hidden').style.color = 'red';
+            }
+        }
+        
+        // Actualizar estado al cargar
+        window.addEventListener('load', () => {
+            console.log('Página cargada. Elementos:');
+            console.log('- always-here: siempre visible');
+            console.log('- dynamic-field: aparece tras botón (2 segundos)');
+            console.log('- hidden-field: en DOM pero display:none');
+        });
+    </script>
+</body>
+</html>
