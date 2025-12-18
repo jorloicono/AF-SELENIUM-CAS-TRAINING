@@ -1,12 +1,10 @@
-# 📚 Ejercicio Completo: Web Tables con Selenium PHP
-
-## 🎯 Objetivo General
+# Objetivo General
 
 Aprender a **automatizar la interacción con tablas HTML** usando Selenium PHP. Trabajarás con lectura de datos, búsqueda, conteo, filtrado y cálculos en tablas web.
 
 ---
 
-## 📋 Contexto
+## Contexto
 
 Estás testeando una **aplicación de gestión de ventas** que muestra una tabla con información de transacciones:
 - ID de venta
@@ -22,7 +20,7 @@ La tabla tiene 10 filas de datos y un campo de búsqueda que filtra por producto
 
 ---
 
-## 🌐 HTML de la Tabla: `html/sales-table.html`
+## HTML de la Tabla: `html/sales-table.html`
 
 ```html
 <!DOCTYPE html>
@@ -343,44 +341,8 @@ La tabla tiene 10 filas de datos y un campo de búsqueda que filtra por producto
 
 ---
 
-## 🚀 Configuración: server.php
 
-```php
-<?php
-/**
- * Servidor PHP Integrado para Ejercicios
- * Ejecutar: php server.php
- * Acceder: http://localhost:8000
- */
-
-// Rutas disponibles
-$routes = [
-    '/'             => 'html/index.html',
-    '/sales-table'  => 'html/sales-table.html',
-];
-
-// Obtener la ruta solicitada
-$request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-// Buscar el archivo correspondiente
-$file = isset($routes[$request_uri]) ? $routes[$request_uri] : null;
-
-// Servir el archivo
-if ($file && file_exists($file)) {
-    if (pathinfo($file, PATHINFO_EXTENSION) === 'html') {
-        header('Content-Type: text/html; charset=utf-8');
-    }
-    readfile($file);
-} else {
-    http_response_code(404);
-    echo "404 - Página no encontrada: " . htmlspecialchars($request_uri);
-}
-?>
-```
-
----
-
-## 📊 Datos de la Tabla
+## Datos de la Tabla
 
 | ID | Cliente | Producto | Cantidad | Precio Unit. | Total | Fecha | Estado |
 |---|---|---|---|---|---|---|---|
@@ -404,7 +366,7 @@ if ($file && file_exists($file)) {
 
 ---
 
-# 🎯 EJERCICIO 1: Lectura Básica de Tablas
+# EJERCICIO 1: Lectura Básica de Tablas
 
 ## Enunciado
 
@@ -578,7 +540,7 @@ PASO 8: Validación completada
 
 ---
 
-# 🎯 EJERCICIO 2: Búsqueda en Tabla
+# EJERCICIO 2: Búsqueda en Tabla
 
 ## Enunciado
 
@@ -744,7 +706,7 @@ PASO 7: Cliente verificado
 
 ---
 
-# 🎯 EJERCICIO 3: Contar Filas y Validar Cantidad
+# EJERCICIO 3: Contar Filas y Validar Cantidad
 
 ## Enunciado
 
@@ -913,7 +875,7 @@ PASO 7: ✓ Resumen validado
 
 ---
 
-# 🎯 EJERCICIO 4: Filtrado de Tabla
+# EJERCICIO 4: Filtrado de Tabla
 
 ## Enunciado
 
@@ -1079,7 +1041,7 @@ Filas eliminadas: 8
 
 ---
 
-# 🎯 EJERCICIO 5: Cálculos en Tabla
+# EJERCICIO 5: Cálculos en Tabla
 
 ## Enunciado
 
@@ -1282,7 +1244,7 @@ PASO 11: ✓ Todas las validaciones correctas
 
 ---
 
-## 📚 Técnicas de Web Tables Resumen
+## Técnicas de Web Tables Resumen
 
 ### Selectores Comunes
 
@@ -1302,56 +1264,3 @@ $cell = $row->findElement(WebDriverBy::xpath(".//td[2]"));
 // Por tabla ID
 $rows = $this->driver->findElements(WebDriverBy::xpath("//table[@id='salesTable']//tbody//tr"));
 ```
-
-### Validaciones Típicas
-
-```php
-// Contar filas
-$totalRows = count($rows);
-if ($totalRows === 0) {
-    throw new \Exception("No hay filas en la tabla");
-}
-
-// Contar columnas
-$totalColumns = count($cells);
-
-// Buscar valor en tabla
-foreach ($rows as $row) {
-    $cells = $row->findElements(WebDriverBy::cssSelector("td"));
-    $valor = $cells[0]->getText();
-    if ($valor === "valor_buscado") {
-        // Encontrado
-    }
-}
-
-// Limpiar datos
-$numero = str_replace("$", "", $texto);
-$numero = str_replace(",", "", $numero);
-$numero = (float)$numero;
-```
-
----
-
-## ✅ Checklist de Verificación
-
-Después de completar cada ejercicio:
-
-- [ ] ¿Se ejecuta sin errores?
-- [ ] ¿Todos los datos se extraen correctamente?
-- [ ] ¿Las validaciones pasan?
-- [ ] ¿El navegador se cierra correctamente con quit()?
-- [ ] ¿La salida en consola coincide con el resultado esperado?
-
----
-
-## 🚀 Próximos Pasos
-
-Una vez domines Web Tables, puedes:
-
-1. **Aplicar con bases de datos** - Guardar datos extraídos en MySQL
-2. **Integrar con APIs** - Enviar datos a un servidor
-3. **Crear reportes** - Generar archivos CSV o PDF
-4. **Automatizar tareas** - Programar scripts con cron
-5. **Combinar con iframes** - Tablas dentro de frames
-
-¡Ahora a trabajar con Web Tables! 💪
