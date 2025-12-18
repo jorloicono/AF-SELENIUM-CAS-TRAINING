@@ -320,3 +320,93 @@ $elem->sendKeys('texto'); // ¿Funcionará?
 ---
 
 
+🎯 Parte 4: Respuestas
+Después de completar, verifica tus respuestas:
+
+Respuestas Teóricas
+P1 - Implicit Wait:
+
+Se configura: Al inicializar WebDriver (UNA sola vez)
+
+Se aplica a: TODOS los findElement() automáticamente
+
+Se puede cambiar: NO, mejor crear uno nuevo
+
+Excepción: NoSuchElementException
+
+P2 - Cuándo usar Explicit:
+
+✓ Elemento que aparece después de hacer clic
+
+✓ Elemento que aparece 2 segundos después
+
+✓ Elemento que cambia de visibilidad dinámicamente
+
+P3 - Implementar Explicit:
+
+php
+$wait = new WebDriverWait($driver, 5); // 5 segundos
+
+$element = $wait->until(function ($driver) {
+    try {
+        $elem = $driver->findElement(WebDriverBy::id('campo-dinamico'));
+        return $elem->isDisplayed() ? $elem : null; // Devuelve elemento si está visible
+    } catch (Exception $e) {
+        return null; // Aún no existe, sigue esperando
+    }
+});
+P4 - Escenarios:
+
+Escenario 1: NoSuchElementException (no espera 15 segundos, solo 10)
+
+Escenario 2: TimeoutException (5 segundos no es suficiente)
+
+Respuestas Prácticas
+Tarea 1 - Implicit:
+
+php
+$driver->manage()->timeouts()->implicitlyWait(10);
+$elem = $driver->findElement(WebDriverBy::id('always-here'));
+$elem->sendKeys('Test Implicit');
+Tarea 2 - Explicit:
+
+php
+$wait = new WebDriverWait($driver, 5);
+$elem = $wait->until(function ($driver) {
+    try {
+        $e = $driver->findElement(WebDriverBy::id('dynamic-field'));
+        return $e->isDisplayed() ? $e : null;
+    } catch (Exception $e) {
+        return null;
+    }
+});
+$elem->sendKeys('Test Explicit');
+Tarea 3 - Predicción:
+
+¿Se encontrará? NO
+
+¿Por qué? Porque no hay Implicit Wait y el elemento aún no está visible
+
+Error: StaleElementReferenceException o NoSuchElementException
+
+Análisis de Código
+Código A:
+
+¿Ayuda Implicit? SI
+
+¿Necesario Explicit? NO (Implicit es suficiente si el Implicit Wait es suficientemente largo)
+
+¿Redundancia? SÍ (podrías dejar solo Implicit)
+
+Optimización: Confiar en Implicit si 10 segundos es suficiente
+
+Código B:
+
+Problema: isDisplayed() devuelve true/false, no el elemento
+
+isDisplayed() devuelve: boolean
+
+Arreglo:
+
+php
+return $e->isDisplayed() ? $e : null; // Devolver el elemento, no el boolean
