@@ -320,7 +320,3 @@ $elem->sendKeys('texto'); // ¿Funcionará?
 ---
 
 
----
-
-¡Completá el ejercicio y me avisas! 🚀
-
