@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2: iFrames</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .iframe-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+
+        .iframe-section h2 {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .iframe-section p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back:hover {
+            background: #5568d3;
+            transform: translateX(-3px);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📦 Ejercicio 2: Trabajando con iFrames</h1>
+        <p class="subtitle">Aprende a cambiar de contexto y acceder a elementos dentro de iFrames</p>
+
+        <!-- iFrame 1: Contenido Estático -->
+        <div class="iframe-section">
+            <h2>
+                1️⃣ iFrame Simple
+                <span class="badge">Básico</span>
+            </h2>
+            <p>Este iFrame contiene un botón que puedes clickear. Haz clic en él desde tu script de Selenium.</p>
+            <iframe id="iframe1"
+                src="C:\Users\Jorge\Desktop\AF-SELENIUM-CAS-TRAINING\RECURSOS\html\nested-iframe.html"></iframe>
+        </div>
+
+        <!-- iFrame 2: Formulario -->
+        <div class="iframe-section">
+            <h2>
+                2️⃣ Formulario en iFrame
+                <span class="badge">Intermedio</span>
+            </h2>
+            <p>Este iFrame contiene un formulario. Tu script debe llenar los campos y enviar el formulario.</p>
+            <iframe id="iframe2"
+                src="C:\Users\Jorge\Desktop\AF-SELENIUM-CAS-TRAINING\RECURSOS\html\form-inside-iframe.html"></iframe>
+        </div>
+
+        <a href="/" class="back">← Volver al inicio</a>
+    </div>
+</body>
+
+</html>

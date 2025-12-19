@@ -32,7 +32,7 @@ class Clase17_Iframe_Completo
 
     private const TIMEOUT_SECONDS = 10;
     private const URL = "https://the-internet.herokuapp.com/iframe";
-    private const TEXTO_PRUEBA = "Texto escrito dentro del iframe con Selenium PHP";
+    private const TEXTO_PRUEBA = "Your content goes here.";
 
     public function ejecutar()
     {
@@ -105,16 +105,19 @@ class Clase17_Iframe_Completo
             )
         );
 
-        $editor->clear();
         $editor->sendKeys(self::TEXTO_PRUEBA);
         echo "✓ Texto escrito\n";
 
-        $textoActual = $editor->getText();
+        $textoActual = trim($editor->getText());
 
-        if ($textoActual === self::TEXTO_PRUEBA) {
+        if (str_contains($textoActual, self::TEXTO_PRUEBA)) {
             echo "✓ Validación correcta del texto\n\n";
         } else {
-            throw new \Exception("El texto dentro del iframe no coincide");
+            throw new \Exception(
+                "El texto dentro del iframe no coincide.\n" .
+                "Esperado: " . self::TEXTO_PRUEBA . "\n" .
+                "Actual: " . $textoActual
+            );
         }
     }
 

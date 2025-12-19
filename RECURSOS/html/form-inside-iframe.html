@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario en iFrame</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff3cd 0%, #fffaeb 100%);
+            min-height: 100vh;
+        }
+
+        .content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        input,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ffc107;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+            color: #333;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #formResult {
+            margin-top: 15px;
+            padding: 15px;
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-item {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .result-item strong {
+            color: #155724;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h2>📝 Formulario dentro del iFrame</h2>
+        <p>Llena este formulario. Cuando hagas clic en enviar, verás los datos aquí mismo dentro del iFrame.</p>
+
+        <form id="iframeForm">
+            <div class="form-group">
+                <label for="iframeName">Nombre:</label>
+                <input type="text" id="iframeName" placeholder="Tu nombre completo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="iframeMessage">Mensaje:</label>
+                <textarea id="iframeMessage" placeholder="Escribe tu mensaje aquí" required></textarea>
+            </div>
+
+            <button type="submit">✉️ Enviar desde iFrame</button>
+        </form>
+
+        <div id="formResult">
+            <div class="result-item"><strong>✅ Nombre:</strong> <span id="resultName"></span></div>
+            <div class="result-item"><strong>📝 Mensaje:</strong> <span id="resultMessage"></span></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('iframeForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let name = document.getElementById('iframeName').value;
+            let msg = document.getElementById('iframeMessage').value;
+
+            document.getElementById('resultName').textContent = name;
+            document.getElementById('resultMessage').textContent = msg;
+            document.getElementById('formResult').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

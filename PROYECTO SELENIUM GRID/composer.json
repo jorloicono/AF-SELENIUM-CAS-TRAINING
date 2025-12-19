@@ -1,0 +1,12 @@
+{
+    "name": "sucedemos/parallel-tests",
+    "require": {
+        "php": ">=7.4",
+        "php-webdriver/webdriver": "^1.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

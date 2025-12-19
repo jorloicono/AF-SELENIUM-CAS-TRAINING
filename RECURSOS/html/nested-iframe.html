@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenido del iFrame 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #e0f4ff 0%, #e8f9ff 100%);
+            min-height: 100vh;
+        }
+
+        .content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        p {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #message {
+            color: #28a745;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 10px;
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+            min-height: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h2>✅ Contenido dentro del iFrame 1</h2>
+        <p>Este contenido está renderizado dentro de un iFrame. Cada iFrame tiene su propio DOM separado del documento
+            principal.</p>
+
+        <button id="iframeBtn">🎯 Haz clic aquí</button>
+
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('iframeBtn').addEventListener('click', function () {
+            document.getElementById('message').textContent = '✓ Botón del iFrame fue clickeado';
+            document.getElementById('message').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>

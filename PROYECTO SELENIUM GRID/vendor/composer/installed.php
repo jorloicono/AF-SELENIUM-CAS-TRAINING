@@ -1,0 +1,56 @@
+<?php return array(
+    'root' => array(
+        'name' => 'sucedemos/parallel-tests',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'de3ebb37026e73f58afc0897566c2543f5695a5a',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'facebook/webdriver' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
+        ),
+        'php-webdriver/webdriver' => array(
+            'pretty_version' => '1.15.2',
+            'version' => '1.15.2.0',
+            'reference' => '998e499b786805568deaf8cbf06f4044f05d91bf',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../php-webdriver/webdriver',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'sucedemos/parallel-tests' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'de3ebb37026e73f58afc0897566c2543f5695a5a',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-mbstring' => array(
+            'pretty_version' => 'v1.33.0',
+            'version' => '1.33.0.0',
+            'reference' => '6d857f4d76bd4b343eac26d6b539585d2bc56493',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/process' => array(
+            'pretty_version' => 'v7.4.0',
+            'version' => '7.4.0.0',
+            'reference' => '7ca8dc2d0dcf4882658313aba8be5d9fd01026c8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/process',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

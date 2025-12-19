@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1: Alertas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-alert {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-alert:hover {
+            background: #ff5252;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-confirm {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        .btn-confirm:hover {
+            background: #45b8ae;
+            box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+        }
+
+        .btn-prompt {
+            background: #ffd93d;
+            color: #333;
+        }
+
+        .btn-prompt:hover {
+            background: #ffce1f;
+            box-shadow: 0 4px 12px rgba(255, 217, 61, 0.3);
+        }
+
+        .status {
+            margin-top: 15px;
+            padding: 12px;
+            background: #f0f4f8;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            font-size: 14px;
+            min-height: 20px;
+            color: #333;
+        }
+
+        .status.success {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f4f8;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back:hover {
+            background: #5568d3;
+            transform: translateX(-3px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📢 Ejercicio 1: Manejo de Alertas</h1>
+        <p class="subtitle">Aprende a manejar alert, confirm y prompt con Selenium</p>
+
+        <!-- SECCIÓN 1: Alert Simple -->
+        <section>
+            <h2>1️⃣ Alert Simple</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
+                Un alert es un cuadro de diálogo simple que muestra un mensaje. Solo tiene botón OK.
+            </p>
+            <div class="button-group">
+                <button class="btn-alert" id="alertBtn">Mostrar Alert</button>
+            </div>
+            <div class="status" id="alertStatus"></div>
+        </section>
+
+        <!-- SECCIÓN 2: Confirm -->
+        <section>
+            <h2>2️⃣ Confirm (Sí/No)</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
+                Un confirm pide confirmación al usuario. Devuelve true (OK) o false (Cancelar).
+            </p>
+            <div class="button-group">
+                <button class="btn-confirm" id="confirmYesBtn">Confirmar (SÍ)</button>
+                <button class="btn-confirm" id="confirmNoBtn">Confirmar (NO)</button>
+            </div>
+            <div class="status" id="confirmStatus"></div>
+        </section>
+
+        <!-- SECCIÓN 3: Prompt -->
+        <section>
+            <h2>3️⃣ Prompt (Entrada de Texto)</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
+                Un prompt solicita entrada de texto al usuario. Devuelve el texto o null si cancela.
+            </p>
+            <div class="button-group">
+                <button class="btn-prompt" id="promptBtn">Solicitar Entrada</button>
+            </div>
+            <div class="status" id="promptStatus"></div>
+        </section>
+
+        <!-- Resultado Final -->
+        <div id="result">
+            <strong>✅ Resultado del Prompt:</strong>
+            <p style="margin-top: 10px;"></p>
+        </div>
+
+        <a href="/" class="back">← Volver al inicio</a>
+    </div>
+
+    <script>
+        // ================================================
+        // ALERT SIMPLE
+        // ================================================
+        document.getElementById('alertBtn').addEventListener('click', function () {
+            alert('Esta es una alerta simple. ¡Haz clic en OK!');
+            document.getElementById('alertStatus').textContent = '✓ Alert completado';
+            document.getElementById('alertStatus').classList.add('success');
+        });
+
+        // ================================================
+        // CONFIRM - SÍ (OK)
+        // ================================================
+        document.getElementById('confirmYesBtn').addEventListener('click', function () {
+            let result = confirm('¿Estás seguro? (haz clic en OK para confirmar)');
+            let status = document.getElementById('confirmStatus');
+            if (result) {
+                status.textContent = '✓ Resultado: Confirmado (OK)';
+                status.classList.add('success');
+            } else {
+                status.textContent = '✗ Resultado: Cancelado (NO)';
+                status.classList.remove('success');
+            }
+        });
+
+        // ================================================
+        // CONFIRM - NO (CANCELAR)
+        // ================================================
+        document.getElementById('confirmNoBtn').addEventListener('click', function () {
+            let result = confirm('¿Estás seguro? (haz clic en Cancelar)');
+            let status = document.getElementById('confirmStatus');
+            if (result) {
+                status.textContent = '✓ Resultado: Confirmado (OK)';
+                status.classList.add('success');
+            } else {
+                status.textContent = '✓ Resultado: Cancelado (NO)';
+                status.classList.add('success');
+            }
+        });
+
+        // ================================================
+        // PROMPT - ENTRADA DE TEXTO
+        // ================================================
+        document.getElementById('promptBtn').addEventListener('click', function () {
+            let userInput = prompt('Ingresa tu nombre:', 'Anónimo');
+            if (userInput !== null) {
+                document.getElementById('promptStatus').textContent = '✓ Entrada recibida: ' + userInput;
+                document.getElementById('promptStatus').classList.add('success');
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('result').innerHTML = '<strong>✅ Datos ingresados:</strong><p>Nombre: <strong>' + userInput + '</strong></p>';
+            }
+        });
+    </script>
+</body>
+
+</html>
