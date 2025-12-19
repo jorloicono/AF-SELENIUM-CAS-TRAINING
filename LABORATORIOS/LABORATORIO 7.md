@@ -79,17 +79,11 @@ wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.15.0/se
 java -jar grid/selenium-server-standalone.jar hub --port 4444
 ```
 
-### 2.3 Iniciar Nodos (Chrome y Firefox)
+### 2.3 Iniciar Nodo
 ```bash
-# Terminal 1 - Chrome Node
 java -jar grid/selenium-server-standalone.jar node \
-  --selenium-grid-hub http://localhost:4444 \
-  --detect-drivers
-
-# Terminal 2 - Firefox Node  
-java -jar grid/selenium-server-standalone.jar node \
-  --selenium-grid-hub http://localhost:4444 \
-  --detect-drivers
+  --hub http://localhost:4444 \
+  --detect-drivers true
 ```
 
 ***
