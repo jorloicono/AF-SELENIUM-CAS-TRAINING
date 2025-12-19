@@ -85,7 +85,7 @@ class Clase8_DemoErrorNoUsoEsperas
         // Ajusta la ruta a tu entorno. Ejemplo usando file://:
         // Ruta equivalente al ejemplo Java:
         // C:\Users\Jorge\Desktop\AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER\RECURSOS\src\ejemplosylabs\resources\index_completo.html
-        $rutaLocalWindows = 'C:\\Users\\Jorge\\Desktop\\AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER\\RECURSOS\\src\\ejemplosylabs\\resources\\index_completo.html';
+        $rutaLocalWindows = 'C:\Users\Jorge\Desktop\AF-SELENIUM-CAS-TRAINING\RECURSOS\index_completo.html';
         $url = 'file:///' . str_replace('\\', '/', $rutaLocalWindows);
 
         echo "   URL: $url\n";

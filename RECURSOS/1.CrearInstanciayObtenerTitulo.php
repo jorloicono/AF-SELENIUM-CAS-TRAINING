@@ -90,7 +90,7 @@ class WikipediaBot
             $this->driver->get('https://es.wikipedia.org/wiki/Wikipedia:Portada');
 
             // Esperar a que la página cargue
-            sleep(2);
+            sleep(10);
 
             // Obtener título de la página
             $titulo = $this->driver->getTitle();
@@ -106,17 +106,6 @@ class WikipediaBot
             // Información adicional
             $url = $this->driver->getCurrentURL();
             echo "   URL actual: " . htmlspecialchars($url) . "\n";
-
-            // Obtener el H1 principal de Wikipedia
-            try {
-                $h1 = $this->driver->findElement(WebDriverBy::cssSelector('h1.firstHeading'));
-                $titulo_contenido = $h1->getText();
-                echo "   Encabezado H1: " . htmlspecialchars($titulo_contenido) . "\n";
-            } catch (Exception $e) {
-                echo "   [No se encontró encabezado H1]\n";
-            }
-
-            echo "\n";
 
         } catch (Exception $e) {
             echo "   ✗ Error durante la navegación: " . $e->getMessage() . "\n\n";

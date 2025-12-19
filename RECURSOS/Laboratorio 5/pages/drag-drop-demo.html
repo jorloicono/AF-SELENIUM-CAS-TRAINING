@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Drag Drop</title>
+    <style>
+        #draggable {
+            width: 80px;
+            height: 30px;
+            background: #cce;
+            padding: 5px;
+            display: inline-block;
+        }
+
+        #dropzone {
+            width: 200px;
+            height: 80px;
+            border: 1px solid #333;
+            display: inline-block;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="draggable" draggable="true">Draggable 1</div>
+    <div id="dropzone">Drop here</div>
+    <div id="dropped-list"></div>
+    <script>const drag = document.getElementById('draggable'), drop = document.getElementById('dropzone'); drop.addEventListener('dragover', e => e.preventDefault()); drop.addEventListener('drop', e => { e.preventDefault(); setTimeout(() => { const span = document.createElement('div'); span.id = 'dropped-item'; span.innerText = 'Draggable 1'; document.getElementById('dropped-list').appendChild(span); }, 400); });</script>
+</body>
+
+</html>

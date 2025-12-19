@@ -26,6 +26,7 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\Support\Events\EventFiringWebDriver;
+use Facebook\WebDriver\WebDriverWait;
 
 class Clase11_ExplicitWait
 {
@@ -89,7 +90,7 @@ class Clase11_ExplicitWait
     {
         echo "[3/5] Navegando a la página local index_completo.html...\n";
 
-        $rutaLocalWindows = 'C:\\Users\\Jorge\\Desktop\\AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER\\RECURSOS\\src\\ejemplosylabs\\resources\\index_completo.html';
+        $rutaLocalWindows = 'C:\Users\Jorge\Desktop\AF-SELENIUM-CAS-TRAINING\RECURSOS\index_completo.html';
         $url = 'file:///' . str_replace('\\', '/', $rutaLocalWindows);
 
         echo "   URL: $url\n";
@@ -113,7 +114,7 @@ class Clase11_ExplicitWait
 
         // En php-webdriver, usamos WebDriverWait que es similar a FluentWait
         // WebDriverWait es esencialmente un FluentWait configurado para Selenium
-        $wait = new \Facebook\WebDriver\Support\WebDriverWait(
+        $wait = new WebDriverWait(
             $this->driver,
             self::TIMEOUT_SECONDS,
             self::POLLING_SECONDS * 1000  // polling en milisegundos

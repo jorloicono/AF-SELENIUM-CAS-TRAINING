@@ -1,22 +1,15 @@
 <?php
 /**
- * Script de Automatización: Expected Conditions - Clickable
- * Adaptación de Clase14_ClickableTest (Java/JUnit) a PHP/PHPUnit
+ * Script de Automatización: Expected Conditions - Clickable (SIN PHPUnit)
  *
  * Este script:
  * 1. Inicia ChromeDriver automáticamente
  * 2. Navega a https://the-internet.herokuapp.com/dynamic_loading/1
  * 3. Configura WebDriverWait con timeout de 10 segundos
- * 4. Espera a que el elemento sea CLICKEABLE (visible, enabled, e interactuable)
+ * 4. Espera a que el elemento sea CLICKEABLE
  * 5. Hace clic en el botón
- * 6. Imprime que el botón fue clickeable y clicado
+ * 6. Imprime el resultado
  * 7. Cierra el navegador
- *
- * Concepto: elementToBeClickable() es una condición compuesta que verifica:
- * - Que el elemento esté presente en el DOM
- * - Que sea visible
- * - Que esté habilitado
- * - Que no haya otros elementos superpuestos
  */
 
 require_once('vendor/autoload.php');
@@ -26,36 +19,67 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\Support\WebDriverWait;
-use Facebook\WebDriver\ExpectedCondition;
-use PHPUnit\Framework\TestCase;
+use Facebook\WebDriver\WebDriverExpectedCondition;
 
-class Clase14_ClickableTest extends TestCase
+class Clase14_Clickable
 {
     private $driver;
     private $wait;
     private $chromeDriverProcess;
+
     private const TIMEOUT_SECONDS = 10;
     private const URL = "https://the-internet.herokuapp.com/dynamic_loading/1";
 
-    protected function setUp(): void
+    public function ejecutar()
     {
-        echo "\n===== SETUP: Inicializando WebDriver =====\n";
-        $this->iniciarChromeDriver();
-        $this->conectarDriver();
-        $this->wait = new WebDriverWait($this->driver, self::TIMEOUT_SECONDS);
-        echo "===== SETUP COMPLETADO =====\n\n";
-    }
+        echo "\n===== INICIO DEL SCRIPT =====\n";
 
-    protected function tearDown(): void
-    {
-        echo "\n===== TEARDOWN: Limpiando recursos =====\n";
-        $this->detener();
-        echo "===== TEARDOWN COMPLETADO =====\n\n";
+        try {
+            $this->iniciarChromeDriver();
+            $this->conectarDriver();
+
+            $this->wait = new WebDriverWait($this->driver, self::TIMEOUT_SECONDS);
+
+            echo "\n[3/4] Navegando a la página...\n";
+            $this->driver->get(self::URL);
+            echo "✓ Página cargada\n\n";
+
+            echo "Esperando a que el botón '#start button' sea CLICKEABLE...\n";
+            echo "Condiciones verificadas:\n";
+            echo "- Presente en el DOM\n";
+            echo "- Visible\n";
+            echo "- Habilitado\n";
+            echo "- No superpuesto\n\n";
+
+            $boton = $this->wait->until(
+                WebDriverExpectedCondition::elementToBeClickable(
+                    WebDriverBy::cssSelector("#start button")
+                )
+            );
+
+            if ($boton !== null) {
+                echo "✓ Botón clickeable\n";
+                echo "Haciendo clic...\n";
+                $boton->click();
+                echo "✓ Clic ejecutado\n\n";
+
+                echo "═════════════════════════════════════\n";
+                echo "✓ RESULTADO: Botón clickeable y clicado\n";
+                echo "═════════════════════════════════════\n\n";
+            }
+
+        } catch (\Exception $e) {
+            echo "✗ ERROR EN EL SCRIPT\n";
+            echo $e->getMessage() . "\n\n";
+        } finally {
+            $this->detener();
+            echo "===== FIN DEL SCRIPT =====\n\n";
+        }
     }
 
     private function iniciarChromeDriver()
     {
-        echo "[1/4] Iniciando ChromeDriver en puerto " . CHROMEDRIVER_PORT . "...\n";
+        echo "[1/4] Iniciando ChromeDriver...\n";
 
         $descriptorspec = [
             0 => ["pipe", "r"],
@@ -75,92 +99,40 @@ class Clase14_ClickableTest extends TestCase
             throw new \Exception("No se pudo iniciar ChromeDriver");
         }
 
-        echo "   ✓ ChromeDriver iniciado correctamente\n";
+        echo "✓ ChromeDriver iniciado\n";
     }
 
     private function conectarDriver()
     {
-        echo "[2/4] Conectando con Selenium WebDriver...\n";
+        echo "[2/4] Conectando con WebDriver...\n";
 
-        try {
-            $capabilities = DesiredCapabilities::chrome();
-            $this->driver = RemoteWebDriver::create(
-                CHROMEDRIVER_HOST,
-                $capabilities,
-                5000
-            );
-            echo "   ✓ Conexión establecida\n";
-        } catch (\Exception $e) {
-            $this->detenerChromeDriver();
-            throw new \Exception("Error de conexión: " . $e->getMessage());
-        }
-    }
+        $capabilities = DesiredCapabilities::chrome();
+        $this->driver = RemoteWebDriver::create(
+            CHROMEDRIVER_HOST,
+            $capabilities,
+            5000
+        );
 
-    /**
-     * Test: Element To Be Clickable
-     * 
-     * Verifica que el elemento sea CLICKEABLE usando elementToBeClickable()
-     * de ExpectedConditions. Esta es una condición compuesta que verifica
-     * múltiples estados del elemento antes de permitir la interacción.
-     */
-    public function testElementToBeClickable()
-    {
-        echo "[3/4] Ejecutando test: testElementToBeClickable()\n\n";
-
-        try {
-            echo "   Navegando a " . self::URL . "...\n";
-            $this->driver->get(self::URL);
-            echo "   ✓ Página cargada\n\n";
-
-            echo "   Esperando a que el elemento '#start button' sea CLICKEABLE...\n";
-            echo "   Condiciones verificadas:\n";
-            echo "   - Elemento presente en el DOM\n";
-            echo "   - Elemento visible en pantalla\n";
-            echo "   - Elemento habilitado (no deshabilitado)\n";
-            echo "   - No hay otros elementos superpuestos\n\n";
-
-            $boton = $this->wait->until(
-                ExpectedCondition::elementToBeClickable(WebDriverBy::cssSelector("#start button"))
-            );
-
-            echo "   ✓ Elemento es clickeable\n\n";
-
-            // Verificación de PHPUnit
-            $this->assertNotNull($boton, "El botón debería estar clickeable");
-
-            echo "   Haciendo clic en el botón...\n";
-            $boton->click();
-            echo "   ✓ Clic ejecutado\n\n";
-
-            echo "   ═════════════════════════════════════════\n";
-            echo "   RESULTADO DEL TEST:\n";
-            echo "   ═════════════════════════════════════════\n";
-            echo "   ✓ TEST PASADO: Botón clickeable y clicado\n";
-            echo "   ═════════════════════════════════════════\n\n";
-
-        } catch (\Exception $e) {
-            echo "✗ EXCEPCIÓN EN TEST:\n";
-            echo $e->getMessage() . "\n\n";
-            $this->fail("Test falló: " . $e->getMessage());
-        }
+        echo "✓ Conexión establecida\n";
     }
 
     private function detener()
     {
-        echo "   Cerrando navegador...\n";
+        echo "\nCerrando recursos...\n";
+
         if ($this->driver !== null) {
             $this->driver->quit();
-            echo "   ✓ Navegador cerrado\n";
+            echo "✓ Navegador cerrado\n";
         }
-        $this->detenerChromeDriver();
-    }
 
-    private function detenerChromeDriver()
-    {
         if (is_resource($this->chromeDriverProcess)) {
             proc_terminate($this->chromeDriverProcess);
             proc_close($this->chromeDriverProcess);
-            echo "   ✓ ChromeDriver detenido\n";
+            echo "✓ ChromeDriver detenido\n";
         }
     }
 }
+
+/* ===== EJECUCIÓN ===== */
+$script = new Clase14_Clickable();
+$script->ejecutar();

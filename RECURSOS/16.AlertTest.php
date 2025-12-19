@@ -1,21 +1,11 @@
 <?php
 /**
- * Script de Automatización: Expected Conditions - Alert Is Present
- * Adaptación de Clase16_AlertTest (Java/JUnit) a PHP/PHPUnit
+ * Script de Automatización: Manejo de los 3 tipos de Alertas JS (SIN PHPUnit)
  *
- * Este script:
- * 1. Inicia ChromeDriver automáticamente
- * 2. Navega a https://the-internet.herokuapp.com/javascript_alerts
- * 3. Configura WebDriverWait con timeout de 10 segundos
- * 4. Hace clic en el botón "Click for JS Alert"
- * 5. Espera a que aparezca una alerta usando alertIsPresent()
- * 6. Cambia el foco al alerta (switchTo().alert())
- * 7. Imprime el texto de la alerta
- * 8. Acepta la alerta (alert.accept())
- * 9. Cierra el navegador
- *
- * Concepto: alertIsPresent() espera a que una alerta JavaScript aparezca.
- * Una vez presente, se puede interactuar con ella usando switchTo().alert().
+ * Tipos:
+ * 1. JS Alert       → aceptar
+ * 2. JS Confirm     → aceptar y cancelar
+ * 3. JS Prompt      → enviar texto y aceptar
  */
 
 require_once('vendor/autoload.php');
@@ -24,47 +14,125 @@ require_once('selenium-config.php');
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverBy;
-use Facebook\WebDriver\Support\WebDriverWait;
-use Facebook\WebDriver\ExpectedCondition;
-use PHPUnit\Framework\TestCase;
+use Facebook\WebDriver\WebDriverWait;
+use Facebook\WebDriver\WebDriverExpectedCondition;
 
-class Clase16_AlertTest extends TestCase
+class Clase16_Alert
 {
     private $driver;
     private $wait;
     private $chromeDriverProcess;
+
     private const TIMEOUT_SECONDS = 10;
     private const URL = "https://the-internet.herokuapp.com/javascript_alerts";
 
-    protected function setUp(): void
+    public function ejecutar()
     {
-        echo "\n===== SETUP: Inicializando WebDriver =====\n";
-        $this->iniciarChromeDriver();
-        $this->conectarDriver();
-        $this->wait = new WebDriverWait($this->driver, self::TIMEOUT_SECONDS);
-        echo "===== SETUP COMPLETADO =====\n\n";
+        echo "\n===== INICIO DEL SCRIPT =====\n";
+
+        try {
+            $this->iniciarChromeDriver();
+            $this->conectarDriver();
+
+            $this->wait = new WebDriverWait($this->driver, self::TIMEOUT_SECONDS);
+
+            echo "\n[3/6] Navegando a la página...\n";
+            $this->driver->get(self::URL);
+            echo "✓ Página cargada\n\n";
+
+            $this->manejarJsAlert();
+            $this->manejarJsConfirm();
+            $this->manejarJsPrompt();
+
+            echo "═════════════════════════════════════\n";
+            echo "✓ RESULTADO FINAL: Todas las alertas manejadas\n";
+            echo "═════════════════════════════════════\n\n";
+
+        } catch (\Exception $e) {
+            echo "✗ ERROR EN EL SCRIPT\n";
+            echo $e->getMessage() . "\n\n";
+        } finally {
+            $this->detener();
+            echo "===== FIN DEL SCRIPT =====\n\n";
+        }
     }
 
-    protected function tearDown(): void
+    /* ================= ALERTA SIMPLE ================= */
+    private function manejarJsAlert()
     {
-        echo "\n===== TEARDOWN: Limpiando recursos =====\n";
-        $this->detener();
-        echo "===== TEARDOWN COMPLETADO =====\n\n";
+        echo "[4/6] JS ALERT (Aceptar)\n";
+
+        $this->driver->findElement(
+            WebDriverBy::xpath("//button[text()='Click for JS Alert']")
+        )->click();
+
+        $this->wait->until(WebDriverExpectedCondition::alertIsPresent());
+        $alert = $this->driver->switchTo()->alert();
+
+        echo "Texto: " . $alert->getText() . "\n";
+        $alert->accept();
+
+        echo "✓ JS Alert aceptada\n\n";
     }
 
+    /* ================= CONFIRM ================= */
+    private function manejarJsConfirm()
+    {
+        echo "[5/6] JS CONFIRM (Aceptar y Cancelar)\n";
+
+        $boton = $this->driver->findElement(
+            WebDriverBy::xpath("//button[text()='Click for JS Confirm']")
+        );
+
+        // ACEPTAR
+        $boton->click();
+        $this->wait->until(WebDriverExpectedCondition::alertIsPresent());
+        $alert = $this->driver->switchTo()->alert();
+        echo "Texto: " . $alert->getText() . "\n";
+        $alert->accept();
+        echo "✓ Confirm aceptado\n";
+
+        // CANCELAR
+        $boton->click();
+        $this->wait->until(WebDriverExpectedCondition::alertIsPresent());
+        $alert = $this->driver->switchTo()->alert();
+        $alert->dismiss();
+        echo "✓ Confirm cancelado\n\n";
+    }
+
+    /* ================= PROMPT ================= */
+    private function manejarJsPrompt()
+    {
+        echo "[6/6] JS PROMPT (Enviar texto)\n";
+
+        $this->driver->findElement(
+            WebDriverBy::xpath("//button[text()='Click for JS Prompt']")
+        )->click();
+
+        $this->wait->until(WebDriverExpectedCondition::alertIsPresent());
+        $alert = $this->driver->switchTo()->alert();
+
+        echo "Texto: " . $alert->getText() . "\n";
+
+        $texto = "Hola Selenium PHP";
+        $alert->sendKeys($texto);
+        $alert->accept();
+
+        echo "✓ Texto enviado: \"$texto\"\n\n";
+    }
+
+    /* ================= SETUP ================= */
     private function iniciarChromeDriver()
     {
-        echo "[1/5] Iniciando ChromeDriver en puerto " . CHROMEDRIVER_PORT . "...\n";
-
-        $descriptorspec = [
-            0 => ["pipe", "r"],
-            1 => ["pipe", "w"],
-            2 => ["pipe", "w"],
-        ];
+        echo "[1/6] Iniciando ChromeDriver...\n";
 
         $this->chromeDriverProcess = proc_open(
             CHROMEDRIVER_PATH . ' --port=' . CHROMEDRIVER_PORT,
-            $descriptorspec,
+            [
+                0 => ["pipe", "r"],
+                1 => ["pipe", "w"],
+                2 => ["pipe", "w"],
+            ],
             $pipes
         );
 
@@ -74,104 +142,39 @@ class Clase16_AlertTest extends TestCase
             throw new \Exception("No se pudo iniciar ChromeDriver");
         }
 
-        echo "   ✓ ChromeDriver iniciado correctamente\n";
+        echo "✓ ChromeDriver iniciado\n";
     }
 
     private function conectarDriver()
     {
-        echo "[2/5] Conectando con Selenium WebDriver...\n";
+        echo "[2/6] Conectando con WebDriver...\n";
 
-        try {
-            $capabilities = DesiredCapabilities::chrome();
-            $this->driver = RemoteWebDriver::create(
-                CHROMEDRIVER_HOST,
-                $capabilities,
-                5000
-            );
-            echo "   ✓ Conexión establecida\n";
-        } catch (\Exception $e) {
-            $this->detenerChromeDriver();
-            throw new \Exception("Error de conexión: " . $e->getMessage());
-        }
-    }
+        $this->driver = RemoteWebDriver::create(
+            CHROMEDRIVER_HOST,
+            DesiredCapabilities::chrome(),
+            5000
+        );
 
-    /**
-     * Test: Alert Is Present
-     * 
-     * Verifica que una alerta JavaScript aparezca usando alertIsPresent()
-     * de ExpectedConditions. Una vez presente, se interactúa con la alerta.
-     */
-    public function testAlertIsPresent()
-    {
-        echo "[3/5] Ejecutando test: testAlertIsPresent()\n\n";
-
-        try {
-            echo "   Navegando a " . self::URL . "...\n";
-            $this->driver->get(self::URL);
-            echo "   ✓ Página cargada\n\n";
-
-            echo "[4/5] Haciendo clic en el botón 'Click for JS Alert'...\n";
-            $botonAlert = $this->driver->findElement(
-                WebDriverBy::xpath("//button[text()='Click for JS Alert']")
-            );
-            echo "   ✓ Botón encontrado\n";
-            $botonAlert->click();
-            echo "   ✓ Clic realizado\n\n";
-
-            echo "[5/5] Esperando a que aparezca la alerta...\n";
-            $this->wait->until(ExpectedCondition::alertIsPresent());
-            echo "   ✓ Alerta presente\n\n";
-
-            // Cambiamos el foco al alerta
-            echo "   Cambiando foco a la alerta...\n";
-            $alert = $this->driver->switchTo()->alert();
-            echo "   ✓ Foco en alerta\n\n";
-
-            // Obtenemos el texto de la alerta
-            $textoAlerta = $alert->getText();
-            echo "   ═════════════════════════════════════════\n";
-            echo "   CONTENIDO DE LA ALERTA:\n";
-            echo "   ═════════════════════════════════════════\n";
-            echo "   Texto alerta: \"" . htmlspecialchars($textoAlerta) . "\"\n";
-            echo "   ═════════════════════════════════════════\n\n";
-
-            // Verificación de PHPUnit
-            $this->assertNotEmpty($textoAlerta, "La alerta debería contener texto");
-
-            // Aceptamos la alerta
-            echo "   Aceptando la alerta (alert.accept())...\n";
-            $alert->accept();
-            echo "   ✓ Alerta aceptada\n\n";
-
-            echo "   ═════════════════════════════════════════\n";
-            echo "   RESULTADO DEL TEST:\n";
-            echo "   ═════════════════════════════════════════\n";
-            echo "   ✓ TEST PASADO: Alerta detectada e interactuada\n";
-            echo "   ═════════════════════════════════════════\n\n";
-
-        } catch (\Exception $e) {
-            echo "✗ EXCEPCIÓN EN TEST:\n";
-            echo $e->getMessage() . "\n\n";
-            $this->fail("Test falló: " . $e->getMessage());
-        }
+        echo "✓ Conexión establecida\n";
     }
 
     private function detener()
     {
-        echo "   Cerrando navegador...\n";
+        echo "\nCerrando recursos...\n";
+
         if ($this->driver !== null) {
             $this->driver->quit();
-            echo "   ✓ Navegador cerrado\n";
+            echo "✓ Navegador cerrado\n";
         }
-        $this->detenerChromeDriver();
-    }
 
-    private function detenerChromeDriver()
-    {
         if (is_resource($this->chromeDriverProcess)) {
             proc_terminate($this->chromeDriverProcess);
             proc_close($this->chromeDriverProcess);
-            echo "   ✓ ChromeDriver detenido\n";
+            echo "✓ ChromeDriver detenido\n";
         }
     }
 }
+
+/* ===== EJECUCIÓN ===== */
+$script = new Clase16_Alert();
+$script->ejecutar();

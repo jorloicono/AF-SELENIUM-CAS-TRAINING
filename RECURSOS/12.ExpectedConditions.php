@@ -23,8 +23,8 @@ require_once('selenium-config.php');
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverBy;
-use Facebook\WebDriver\Support\WebDriverWait;
-use Facebook\WebDriver\ExpectedCondition;
+use Facebook\WebDriver\WebDriverWait;
+use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class Clase12_ExpectedConditions1
 {
@@ -125,7 +125,7 @@ class Clase12_ExpectedConditions1
             // Esperamos a que el elemento con id "finish" sea visible
             echo "   Esperando a que el elemento 'finish' sea visible...\n";
             $mensaje = $wait->until(
-                ExpectedCondition::visibilityOfElementLocated(WebDriverBy::id("finish"))
+                WebDriverExpectedCondition::visibilityOfElementLocated(WebDriverBy::id("finish"))
             );
 
             echo "   ✓ Elemento visible encontrado\n\n";

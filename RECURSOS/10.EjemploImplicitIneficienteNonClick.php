@@ -101,7 +101,7 @@ class Clase10_EjemploImplicitIneficienteNonClick
     {
         echo "[4/5] Navegando a la página local index_completo.html...\n";
 
-        $rutaLocalWindows = 'C:\\Users\\Jorge\\Downloads\\jorloicono AF-TESTING-AUTOMATIZADO-SELENIUM-CUCUMBER master RECURSOS\\SELENIUM\\src\\ejemplosylabs\\resources\\index_completo.html';
+        $rutaLocalWindows = 'C:\Users\Jorge\Desktop\AF-SELENIUM-CAS-TRAINING\RECURSOS\index_completo.html';
         $url = 'file:///' . str_replace('\\', '/', $rutaLocalWindows);
 
         echo "   URL: $url\n";

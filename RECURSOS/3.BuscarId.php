@@ -163,7 +163,7 @@ class Clase3_BuscarElementoPorElId
             $this->navegarWikipedia();
 
             // Esperar 2 segundos
-            $this->esperar(2000);
+            $this->esperar(5000);
 
             // Buscar el elemento con id ca-history y hacer clic
             $this->buscarYHacerClicPorId('ca-history');
