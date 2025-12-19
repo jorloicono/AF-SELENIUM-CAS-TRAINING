@@ -1,197 +1,412 @@
-# **EXPLICACIÓN COMPLETA DEL EJERCICIO**
+# Ejercicio: Implicit y Explicit Waits en PHP - Solo Waits
 
-La página usada: [https://www.selenium.dev/selenium/web/dynamic.html](https://www.selenium.dev/selenium/web/dynamic.html)
+## Objetivo
 
-Esta web fue creada específicamente por Selenium para simular **comportamientos dinámicos reales**, como:
-
-* AJAX
-* habilitar/deshabilitar botones
-* cambios de estilo
-* creación de frames en tiempo real
-* elementos que aparecen y desaparecen
-
-Esto la hace perfecta para practicar sincronización.
-
-
-# **OBJETIVO GENERAL**
-
-Ejercitar los 3 tipos de espera en Selenium, aplicados a situaciones reales:
-
-| Situación                 | Espera usada                        |
-| ------------------------- | ----------------------------------- |
-| Botón que se habilita     | Explicit Wait                       |
-| Carga AJAX                | Explicit Wait                       |
-| Frame que aparece después | Explicit Wait (frameToBeAvailable…) |
-| Cambio de color animado   | Fluent Wait + cond. personalizada   |
-
-La idea no es solo usar esperas, sino **aprender cuándo y por qué usarlas**.
+Dominar la diferencia entre **Implicit Waits** y **Explicit Waits** sin Expected Conditions en PHP con Selenium.
 
 ---
 
-# **EXPLICACIÓN DETALLADA DEL CÓDIGO (PASO A PASO)**
+## 📋 Parte 1: Preguntas Teóricas
 
----
+### Pregunta 1: ¿Cuál es la diferencia fundamental?
 
-## **1. Configuración inicial**
+**Implicit Wait:**
+- ¿Cuándo se configura?
+- ¿A qué elementos se aplica?
+- ¿Se puede cambiar durante la ejecución?
+- ¿Qué excepción lanza si no encuentra el elemento?
 
-```java
-WebDriver driver = new ChromeDriver();
-driver.manage().window().maximize();
-driver.get("https://www.selenium.dev/selenium/web/dynamic.html");
+**Tu respuesta:**
+```
+Implicit se configura: _________________________________________
+Se aplica a: _________________________________________
+Se puede cambiar: _________________________________________
+Excepción: _________________________________________
 ```
 
-Se abre Chrome, se maximiza la ventana y se abre la web dinámica.
+---
+
+### Pregunta 2: ¿Cuándo usar Explicit Wait?
+
+Indica si deberías usar Explicit Wait en estos casos:
+
+- [ ] Un elemento que siempre está en la página
+- [ ] Un elemento que aparece después de hacer clic
+- [ ] Un elemento que aparece 2 segundos después de llenar un campo
+- [ ] Un elemento que cambia de visibilidad dinámicamente
+- [ ] Un botón que siempre está presente desde carga
+
+**Tu respuesta:** ✓ casos: _____, _____
 
 ---
 
-## **2. Esperar a que un botón se habilite dinámicamente**
+### Pregunta 3: ¿Cómo implementar un Explicit Wait sin ExpectedConditions en PHP?
 
-```java
-WebElement enableBtn = driver.findElement(By.id("enable-button"));
+Rellena el código:
 
-wait.until(ExpectedConditions.elementToBeClickable(enableBtn));
-enableBtn.click();
-```
+```php
+$wait = new WebDriverWait($driver, ?);
 
-### ¿Qué pasa aquí?
-
-1. El botón empieza **deshabilitado** (`disabled`).
-2. Después de un tiempo, la página lo **habilita**.
-3. `elementToBeClickable` asegura que:
-
-   * el elemento sea **visible**
-   * el elemento sea **enabled**
-   * el elemento no esté cubierto por nada
-
-Si no usas este wait → Selenium falla porque intenta clic antes de tiempo.
-
----
-
-## **3. Forzar una carga AJAX**
-
-```java
-WebElement addBtn = driver.findElement(By.id("adder"));
-addBtn.click();
-```
-
-El botón dispara un **request AJAX**, que crea un nuevo elemento dinámico.
-
----
-
-## **4. Esperar a que aparezca un elemento generado vía AJAX**
-
-```java
-WebElement newElement = wait.until(
-    ExpectedConditions.visibilityOfElementLocated(By.className("redbox"))
-);
-```
-
-Esto evita errores típicos:
-
-* `NoSuchElementException`
-* `ElementNotVisibleException`
-* `StaleElementReferenceException`
-
-La espera explícita no continúa hasta que:
-
-✔ El elemento existe en el DOM
-✔ Es visible
-✔ Tiene dimensiones (>0 px)
-
----
-
-## **5. Crear un iframe dinámico y esperar a que exista**
-
-```java
-WebElement frameBtn = driver.findElement(By.id("frame-button"));
-frameBtn.click();
-
-wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.tagName("iframe")));
-```
-
-### ¿Qué está pasando aquí?
-
-1. El frame **NO está en el DOM** al principio.
-2. Cuando presionas el botón, el frame se crea.
-3. La espera:
-
-   * Espera a que el `iframe` aparezca
-   * Cambia automáticamente el driver **dentro del frame**
-
-Si no haces esto → Selenium no verá el contenido interno.
-
----
-
-## **6. Leer algo dentro del frame**
-
-```java
-WebElement frameText = wait.until(
-    ExpectedConditions.visibilityOfElementLocated(By.id("inside-frame"))
-);
-```
-
-Dentro del frame aparece un texto dinámico.
-Necesitas una espera **porque aparece con retraso**.
-
----
-
-## **7. Volver al DOM principal**
-
-```java
-driver.switchTo().defaultContent();
-```
-
-Muy importante:
-Si no vuelves al contexto principal, Selenium sigue "encerrado" en el frame y fallará todo lo demás.
-
----
-
-## **8. Fluent Wait para esperar un cambio de color**
-
-```java
-WebElement colorChanging = driver.findElement(By.id("colorbox"));
-
-Wait<WebDriver> fluentWait = new FluentWait<>(driver)
-        .withTimeout(Duration.ofSeconds(20))
-        .pollingEvery(Duration.ofSeconds(2))
-        .ignoring(NoSuchElementException.class);
-```
-
-### 🔍 Fluent Wait permite:
-
-* Definir tiempo máximo
-* Definir intervalos de consulta
-* Ignorar excepciones
-* Usar funciones personalizadas
-
-### Condición personalizada:
-
-```java
-Boolean colorChanged = fluentWait.until(driver -> {
-    String color = colorChanging.getCssValue("background-color");
-    System.out.println("Esperando cambio de color... actual: " + color);
-    return color.contains("0, 128, 0"); // verde
+$element = $wait->until(function ($driver) {
+    try {
+        $elem = $driver->findElement(WebDriverBy::id('campo-dinamico'));
+        return ? ? ? : null;
+    } catch (Exception $e) {
+        return ?;
+    }
 });
 ```
 
-Esperamos hasta que el CSS cambie a verde.
-
-Esto NO se puede lograr con un ExpectedCondition normal.
+**Tu respuesta:**
+- Timeout: `?` segundos
+- Condición: `$elem->???()` → debe devolver true
+- Si falla: `?`
 
 ---
 
-## **9. Validar texto final**
+### Pregunta 4: ¿Qué sucede en estos escenarios?
 
-```java
-WebElement finish = wait.until(
-        ExpectedConditions.visibilityOfElementLocated(By.id("finish"))
-);
-System.out.println("Texto final: " + finish.getText());
+**Escenario 1:**
+```php
+$driver->manage()->timeouts()->implicitlyWait(10);
+// ... elemento no aparece en 15 segundos
+$elem = $driver->findElement(WebDriverBy::id('campo'));
+```
+¿Qué pasa? _____________________________________________
+
+**Escenario 2:**
+```php
+$wait = new WebDriverWait($driver, 3);
+$elem = $wait->until(function ($driver) {
+    $e = $driver->findElement(WebDriverBy::id('campo'));
+    return $e->isDisplayed() ? $e : null;
+});
+// El elemento aparece después de 5 segundos
+```
+¿Qué pasa? _____________________________________________
+
+**Tu respuesta:**
+- Escenario 1: _________________________________________
+- Escenario 2: _________________________________________
+
+---
+
+## 💻 Parte 2: Ejercicio Práctico Minimalista
+
+### Configuración
+
+Descarga estas 2 páginas HTML en una carpeta:
+
+**`simple-form.html`** - Página con elementos dinámicos:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wait Practice</title>
+</head>
+<body>
+    <h1>Prueba de Waits</h1>
+    
+    <!-- Elemento que siempre está (para Implicit) -->
+    <input id="always-here" type="text" placeholder="Siempre visible">
+    
+    <!-- Elemento que aparece después 2 segundos (para Explicit) -->
+    <input id="dynamic-field" type="text" placeholder="Aparece dinamicamente" style="display:none;">
+    
+    <button onclick="showField()">Mostrar Campo Dinámico</button>
+    
+    <script>
+        function showField() {
+            setTimeout(() => {
+                document.getElementById('dynamic-field').style.display = 'block';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
 ```
 
-Un texto aparece cuando todos los procesos dinámicos terminan.
+Guarda como `simple-form.html` y nota su ruta.
+
+---
+
+### Tarea 1: Implicit Wait
+
+**Código base:**
+```php
+<?php
+require 'vendor/autoload.php';
+
+use Facebook\WebDriver\Chrome\ChromeDriver;
+use Facebook\WebDriver\WebDriverBy;
+
+$driver = ChromeDriver::start();
+
+// TODO: Configura Implicit Wait de 10 segundos
+// $driver->manage()->timeouts()->implicitlyWait(?);
+
+try {
+    $driver->get('file:///C:/ruta/a/simple-form.html');
+    
+    // TODO: Localiza el campo "always-here" usando findElement
+    // No deberías agregar esperas adicionales
+    // $elem = $driver->findElement(?);
+    
+    // TODO: Escribe "Test Implicit" en el campo
+    // $elem->?('Test Implicit');
+    
+    echo "✓ Implicit Wait funcionó\n";
+    
+} catch (Exception $e) {
+    echo "✗ Error: " . $e->getMessage() . "\n";
+} finally {
+    $driver->quit();
+}
+?>
+```
+
+**Tu tarea:** Completa el código (3 líneas)
+
+**Validación:** El campo debe contener "Test Implicit"
+
+---
+
+### Tarea 2: Explicit Wait (el campo que aparece)
+
+**Código base:**
+```php
+<?php
+require 'vendor/autoload.php';
+
+use Facebook\WebDriver\Chrome\ChromeDriver;
+use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverWait;
+
+$driver = ChromeDriver::start();
+$driver->manage()->timeouts()->implicitlyWait(10);
+
+try {
+    $driver->get('file:///C:/ruta/a/simple-form.html');
+    
+    // PASO 1: Haz clic en el botón
+    $btn = $driver->findElement(WebDriverBy::cssSelector('button'));
+    $btn->click();
+    echo "✓ Botón clickeado, esperando campo dinámico...\n";
+    
+    // PASO 2: TODO - Usa Explicit Wait para esperar "dynamic-field"
+    // Espera 5 segundos
+    // Valida que esté visible
+    // Sin ExpectedConditions
+    
+    // $wait = new WebDriverWait($driver, ?);
+    // $elem = $wait->until(function ($driver) {
+    //     try {
+    //         $e = $driver->findElement(WebDriverBy::id('?'));
+    //         return $e->?() ? $e : null;
+    //     } catch (Exception $e) {
+    //         return ?;
+    //     }
+    // });
+    
+    // PASO 3: Escribe "Test Explicit" en el campo dinámico
+    // $elem->sendKeys('?');
+    
+    echo "✓ Explicit Wait funcionó\n";
+    
+} catch (Exception $e) {
+    echo "✗ Error: " . $e->getMessage() . "\n";
+} finally {
+    $driver->quit();
+}
+?>
+```
+
+**Tu tarea:** Completa Explicit Wait (5 líneas en el callable)
+
+**Validación:** El campo debe contener "Test Explicit" tras esperar
+
+---
+
+### Tarea 3: Comparación
+
+**Código base - ¿Qué pasará?**
+
+```php
+<?php
+require 'vendor/autoload.php';
+
+use Facebook\WebDriver\Chrome\ChromeDriver;
+use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverWait;
+
+$driver = ChromeDriver::start();
+
+// SIN Implicit Wait (comentado)
+// $driver->manage()->timeouts()->implicitlyWait(10);
+
+try {
+    $driver->get('file:///C:/ruta/a/simple-form.html');
+    
+    // Haz clic en el botón
+    $btn = $driver->findElement(WebDriverBy::cssSelector('button'));
+    $btn->click();
+    
+    // TODO: ¿Qué pasará aquí?
+    // $elem = $driver->findElement(WebDriverBy::id('dynamic-field'));
+    
+    echo "✓ Campo encontrado\n";
+    
+} catch (Exception $e) {
+    echo "✗ Error: " . $e->getMessage() . "\n";
+} finally {
+    $driver->quit();
+}
+?>
+```
+
+**Tu predicción:**
+- ¿Se encontrará el elemento? SI / NO
+- ¿Por qué? _________________________________________
+- ¿Qué error se lanzaría? _________________________________________
+
+---
+
+## 📝 Parte 3: Análisis de Código
+
+### Código A: ¿Está bien?
+
+```php
+$driver->manage()->timeouts()->implicitlyWait(10);
+
+// ... cargar página
+
+$elem = $driver->findElement(WebDriverBy::id('campo'));
+$elem->sendKeys('texto');
+
+$wait = new WebDriverWait($driver, 5);
+$dinamico = $wait->until(function ($driver) {
+    return $driver->findElement(WebDriverBy::id('dinamico'))->isDisplayed() 
+           ? $driver->findElement(WebDriverBy::id('dinamico')) 
+           : null;
+});
+```
+
+**Preguntas:**
+- ¿El Implicit Wait ayuda en el primer `findElement`? SI / NO
+- ¿El Explicit Wait es necesario aquí? SI / NO
+- ¿Hay redundancia? SI / NO
+- ¿Cómo lo optimizarías? _________________________________________
+
+---
+
+### Código B: ¿Hay un error?
+
+```php
+$wait = new WebDriverWait($driver, 5);
+
+$elem = $wait->until(function ($driver) {
+    $e = $driver->findElement(WebDriverBy::id('campo'));
+    return $e->isDisplayed();
+});
+
+$elem->sendKeys('texto'); // ¿Funcionará?
+```
+
+**Preguntas:**
+- ¿Cuál es el problema? _________________________________________
+- ¿Qué devuelve `isDisplayed()`? _________________________________________
+- ¿Cómo lo arreglarías? _________________________________________
 
 ---
 
 
-¿Quieres ese nivel?
+🎯 Parte 4: Respuestas
+Después de completar, verifica tus respuestas:
+
+Respuestas Teóricas
+P1 - Implicit Wait:
+
+Se configura: Al inicializar WebDriver (UNA sola vez)
+
+Se aplica a: TODOS los findElement() automáticamente
+
+Se puede cambiar: NO, mejor crear uno nuevo
+
+Excepción: NoSuchElementException
+
+P2 - Cuándo usar Explicit:
+
+✓ Elemento que aparece después de hacer clic
+
+✓ Elemento que aparece 2 segundos después
+
+✓ Elemento que cambia de visibilidad dinámicamente
+
+P3 - Implementar Explicit:
+
+php
+$wait = new WebDriverWait($driver, 5); // 5 segundos
+
+$element = $wait->until(function ($driver) {
+    try {
+        $elem = $driver->findElement(WebDriverBy::id('campo-dinamico'));
+        return $elem->isDisplayed() ? $elem : null; // Devuelve elemento si está visible
+    } catch (Exception $e) {
+        return null; // Aún no existe, sigue esperando
+    }
+});
+P4 - Escenarios:
+
+Escenario 1: NoSuchElementException (no espera 15 segundos, solo 10)
+
+Escenario 2: TimeoutException (5 segundos no es suficiente)
+
+Respuestas Prácticas
+Tarea 1 - Implicit:
+
+php
+$driver->manage()->timeouts()->implicitlyWait(10);
+$elem = $driver->findElement(WebDriverBy::id('always-here'));
+$elem->sendKeys('Test Implicit');
+Tarea 2 - Explicit:
+
+php
+$wait = new WebDriverWait($driver, 5);
+$elem = $wait->until(function ($driver) {
+    try {
+        $e = $driver->findElement(WebDriverBy::id('dynamic-field'));
+        return $e->isDisplayed() ? $e : null;
+    } catch (Exception $e) {
+        return null;
+    }
+});
+$elem->sendKeys('Test Explicit');
+Tarea 3 - Predicción:
+
+¿Se encontrará? NO
+
+¿Por qué? Porque no hay Implicit Wait y el elemento aún no está visible
+
+Error: StaleElementReferenceException o NoSuchElementException
+
+Análisis de Código
+Código A:
+
+¿Ayuda Implicit? SI
+
+¿Necesario Explicit? NO (Implicit es suficiente si el Implicit Wait es suficientemente largo)
+
+¿Redundancia? SÍ (podrías dejar solo Implicit)
+
+Optimización: Confiar en Implicit si 10 segundos es suficiente
+
+Código B:
+
+Problema: isDisplayed() devuelve true/false, no el elemento
+
+isDisplayed() devuelve: boolean
+
+Arreglo:
+
+php
+return $e->isDisplayed() ? $e : null; // Devolver el elemento, no el boolean
