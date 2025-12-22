@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tabs & Accordion - Selenium Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .tabs {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background: #f1f1f1;
+        }
+
+        .tab-button {
+            background: #ddd;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+        .tab-button:hover {
+            background: #ccc;
+        }
+
+        .tab-button.active {
+            background: #007cba;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .accordion {
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+        }
+
+        .accordion-header {
+            background: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .accordion-header:hover {
+            background: #e9ecef;
+        }
+
+        .accordion-header.active {
+            background: #28a745;
+            color: white;
+        }
+
+        .accordion-body {
+            padding: 15px;
+            background: #f8f9fa;
+            display: none;
+        }
+
+        .accordion-body.active {
+            display: block;
+        }
+
+        .status {
+            background: #e7f3ff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        button.test-btn {
+            background: #dc3545;
+            color: white;
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 Tabs & Accordion - Selenium Practice</h1>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'home')">🏠 Home</button>
+        <button class="tab-button" onclick="openTab(event, 'products')">🛒 Products</button>
+        <button class="tab-button" onclick="openTab(event, 'contact')">📧 Contact</button>
+    </div>
+
+    <div id="home" class="tab-content active">
+        <h2>Bienvenido a la práctica</h2>
+        <p>Este es un <strong>HTML de prueba</strong> con tabs y accordion para Selenium.</p>
+        <p>Objetivo: Automatizar navegación entre tabs y expansión de panels.</p>
+    </div>
+
+    <div id="products" class="tab-content">
+        <h2>Productos</h2>
+        <p>Interactúa con el <strong>accordion de productos</strong> debajo:</p>
+
+        <!-- ACCORDION -->
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(1)">📱 Smartphone Pro</div>
+                <div class="accordion-body" id="panel1">
+                    <p>Smartphone con <strong>6.5" AMOLED</strong>, 128GB, cámara 108MP. Precio: €599</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(2)">💻 Laptop Ultra</div>
+                <div class="accordion-body" id="panel2">
+                    <p>Laptop <strong>Intel i7, 16GB RAM</strong>, SSD 1TB, pantalla 15.6" 4K. Precio: €1299</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(3)">🎧 Wireless Pro</div>
+                <div class="accordion-body" id="panel3">
+                    <p>Auriculares <strong>ANC noise cancelling</strong>, 30h batería, Bluetooth 5.2. Precio: €199</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="tab-content">
+        <h2>Contacto</h2>
+        <p>Envíanos un email a <strong>info@testing.com</strong></p>
+        <p>Teléfono: <strong>+34 123 456 789</strong></p>
+    </div>
+
+    <div class="status">
+        <h3>📊 Estado Actual</h3>
+        <div id="tab-status">Tab activa: Home</div>
+        <div id="accordion-status">Panels expandidos: 0/3</div>
+        <button class="test-btn" onclick="resetAll()">🔄 Reset Todo</button>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+            document.getElementById('tab-status').textContent = 'Tab activa: ' + tabName.charAt(0).toUpperCase() + tabName.slice(1);
+        }
+
+        let expandedPanels = 0;
+        function toggleAccordion(panelId) {
+            const body = document.getElementById('panel' + panelId);
+            const header = body.previousElementSibling;
+
+            if (body.classList.contains('active')) {
+                body.classList.remove('active');
+                header.classList.remove('active');
+                expandedPanels--;
+            } else {
+                body.classList.add('active');
+                header.classList.add('active');
+                expandedPanels++;
+            }
+            document.getElementById('accordion-status').textContent = 'Panels expandidos: ' + expandedPanels + '/3';
+        }
+
+        function resetAll() {
+            document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
+            document.querySelectorAll('.tab-button')[0].click();
+            expandedPanels = 0;
+            document.getElementById('accordion-status').textContent = 'Panels expandidos: 0/3';
+        }
+    </script>
+</body>
+
+</html>

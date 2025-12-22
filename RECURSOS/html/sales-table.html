@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Ventas - Tabla</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        thead th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        tbody td {
+            padding: 12px 15px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-completado {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pendiente {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-cancelado {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .price {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back:hover {
+            background: #5568d3;
+            transform: translateX(-3px);
+        }
+
+        .row-count {
+            margin-top: 15px;
+            padding: 10px;
+            background: #e8f4f8;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #007bff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📊 Gestión de Ventas</h1>
+        <p class="subtitle">Sistema de control de ventas - Tabla completa de datos</p>
+
+        <!-- Controles de búsqueda -->
+        <div class="controls">
+            <div class="search-group">
+                <label for="searchInput">Buscar por producto:</label>
+                <input type="text" id="searchInput" placeholder="Ej: Laptop, Tablet, Mouse..." autocomplete="off">
+            </div>
+        </div>
+
+        <!-- Tabla de ventas -->
+        <div class="table-wrapper">
+            <table id="salesTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unit.</th>
+                        <th>Total</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Las filas se llenarán con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row-count">
+            Mostrando: <span id="rowCount">0</span> registros
+        </div>
+
+        <div class="info-box">
+            <strong>ℹ️ Información:</strong>
+            <p>Esta tabla contiene datos de ventas completos. Usa el campo de búsqueda para filtrar por producto. Los
+                datos son dinámicos y se filtran automáticamente.</p>
+        </div>
+
+        <a href="/" class="back">← Volver al inicio</a>
+    </div>
+
+    <script>
+        // Datos de ventas
+        const ventasData = [
+            { id: 1001, cliente: "Juan García", producto: "Laptop", cantidad: 2, precio: 999.99, total: 1999.98, fecha: "2024-01-15", estado: "Completado" },
+            { id: 1002, cliente: "Carlos Ruiz", producto: "Mouse", cantidad: 10, precio: 25.50, total: 255.00, fecha: "2024-01-14", estado: "Completado" },
+            { id: 1003, cliente: "María López", producto: "Tablet", cantidad: 5, precio: 299.99, total: 1499.95, fecha: "2024-01-17", estado: "Completado" },
+            { id: 1004, cliente: "Ana Martínez", producto: "Monitor", cantidad: 3, precio: 349.99, total: 1049.97, fecha: "2024-01-18", estado: "Pendiente" },
+            { id: 1005, cliente: "Roberto Díaz", producto: "Laptop", cantidad: 1, precio: 999.99, total: 999.99, fecha: "2024-01-19", estado: "Completado" },
+            { id: 1006, cliente: "Sofia Fernández", producto: "Teclado", cantidad: 8, precio: 79.99, total: 639.92, fecha: "2024-01-20", estado: "Completado" },
+            { id: 1007, cliente: "Miguel Sánchez", producto: "Webcam", cantidad: 4, precio: 89.99, total: 359.96, fecha: "2024-01-21", estado: "Cancelado" },
+            { id: 1008, cliente: "Laura González", producto: "Auriculares", cantidad: 6, precio: 149.99, total: 899.94, fecha: "2024-01-22", estado: "Completado" },
+            { id: 1009, cliente: "Fernando López", producto: "Monitor", cantidad: 2, precio: 349.99, total: 699.98, fecha: "2024-01-23", estado: "Pendiente" },
+            { id: 1010, cliente: "Patricia Rodríguez", producto: "Cable USB", cantidad: 20, precio: 9.99, total: 199.80, fecha: "2024-01-24", estado: "Cancelado" }
+        ];
+
+        function formatearPrecio(numero) {
+            return "$" + numero.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function getStatusClass(estado) {
+            const estado_lower = estado.toLowerCase();
+            if (estado_lower === "completado") return "status-completado";
+            if (estado_lower === "pendiente") return "status-pendiente";
+            if (estado_lower === "cancelado") return "status-cancelado";
+            return "";
+        }
+
+        function renderTable(datos) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            datos.forEach(venta => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${venta.id}</strong></td>
+                    <td>${venta.cliente}</td>
+                    <td>${venta.producto}</td>
+                    <td>${venta.cantidad}</td>
+                    <td class="price">${formatearPrecio(venta.precio)}</td>
+                    <td class="price"><strong>${formatearPrecio(venta.total)}</strong></td>
+                    <td>${venta.fecha}</td>
+                    <td>
+                        <span class="status-badge ${getStatusClass(venta.estado)}">
+                            ${venta.estado}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            document.getElementById('rowCount').textContent = datos.length;
+        }
+
+        function filtrarTabla() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            if (searchTerm === '') {
+                renderTable(ventasData);
+            } else {
+                const filtered = ventasData.filter(venta =>
+                    venta.producto.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filtered);
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            filtrarTabla();
+        });
+
+        document.getElementById('searchInput').addEventListener('input', function () {
+            filtrarTabla();
+        });
+
+        renderTable(ventasData);
+    </script>
+</body>
+
+</html>

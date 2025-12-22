@@ -1,0 +1,25 @@
+# behat.yml - CONFIGURACIÓN DETALLADA
+default:                                    # Perfil por defecto
+  extensions:                               # Extensiones/plugins
+    Behat\MinkExtension:                    # 🔌 Extensión Mink (OBLIGATORIA)
+      base_url: 'https://www.saucedemo.com/'
+      browser_name: 'chrome'
+      selenium2:
+        wd_host: "127.0.0.1:9515/wd/hub"
+        capabilities:
+          browserName: "chrome"
+          chrome:
+            switches:
+              - "--disable-gpu"
+              - "--no-sandbox"
+              - "--disable-dev-shm-usage"
+              - "--window-size=1920,1080"
+  
+  suites:
+    default:
+      paths: [ "%paths.base%/features" ]
+      contexts:
+        - FeatureContext
+
+  formatters:
+    pretty: ~
