@@ -148,10 +148,7 @@
 
 ***
 
-## 📝 **2. EJERCICIO EN MD (ejercicio.md)**
-
-```markdown
-# 🏆 TABS & ACCORDION SELENIUM CHALLENGE
+## 📝 **2. EJERCICIO EN MD**
 
 ## 🎯 OBJETIVO
 Automatizar navegación completa entre tabs y accordion con **validaciones estrictas**.
