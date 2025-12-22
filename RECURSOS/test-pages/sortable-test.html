@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sortable - Selenium Practice</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/ui-lightness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #495057;
+        }
+
+        .demo-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #sortable {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            min-height: 300px;
+        }
+
+        #sortable li {
+            margin: 5px;
+            padding: 10px;
+            font-size: 18px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: move;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .status {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .reset-btn {
+            background: #dc3545;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔀 Sortable - Selenium Practice</h1>
+
+    <div class="demo-container">
+        <ul id="sortable">
+            <li class="ui-state-default">Item 1</li>
+            <li class="ui-state-default">Item 2</li>
+            <li class="ui-state-default">Item 3</li>
+            <li class="ui-state-default">Item 4</li>
+            <li class="ui-state-default">Item 5</li>
+        </ul>
+
+        <div class="status">
+            <h3>📋 Current Order</h3>
+            <div id="order-status">Item 1, Item 2, Item 3, Item 4, Item 5</div>
+            <button class="reset-btn" onclick="resetOrder()">🔄 Reset Order</button>
+        </div>
+    </div>
+
+    <script>
+        $("#sortable").sortable({
+            placeholder: "ui-state-highlight",
+            update: function (event, ui) {
+                const items = $(this).sortable('toArray', { attribute: 'innerText' });
+                const order = items.map(t => t.trim()).join(', ');
+                $('#order-status').text(order);
+            }
+        });
+
+        function resetOrder() {
+            location.reload();
+        }
+    </script>
+</body>
+
+</html>

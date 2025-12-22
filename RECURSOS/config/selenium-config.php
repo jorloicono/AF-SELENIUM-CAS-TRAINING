@@ -6,7 +6,12 @@
  * para las pruebas de automatización
  */
 
-define('CHROMEDRIVER_PATH', __DIR__ . DIRECTORY_SEPARATOR . 'chromedriver.exe');
+// Rutas del proyecto
+define('PROJECT_ROOT', dirname(__DIR__));
+define('CHROMEDRIVER_PATH', PROJECT_ROOT . DIRECTORY_SEPARATOR . 'drivers' . DIRECTORY_SEPARATOR . 'chromedriver.exe');
+define('TEST_PAGES_PATH', PROJECT_ROOT . DIRECTORY_SEPARATOR . 'test-pages');
+
+// Configuración de ChromeDriver
 define('CHROMEDRIVER_PORT', 9515);
 define('CHROMEDRIVER_HOST', 'http://127.0.0.1:' . CHROMEDRIVER_PORT);
 
